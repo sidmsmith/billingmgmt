@@ -1,0 +1,482 @@
+[
+  {
+    "component": "receiving",
+    "ruleTypeId": "PreAllocateRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /receiving/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-receiving-1\",\"cloudComponentHostName\":\"all-com-manh-cp-receiving-68f8f59f78-9wldk\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "receiving",
+    "ruleTypeId": "ProcessNeedRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /receiving/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-receiving-1\",\"cloudComponentHostName\":\"com-manh-cp-receiving-b846d59cf-wk9s2\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "receiving",
+    "ruleTypeId": "ExecutionCriteria",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /receiving/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-receiving-1\",\"cloudComponentHostName\":\"com-manh-cp-receiving-b846d59cf-wk9s2\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "receiving",
+    "ruleTypeId": "ReceivingRulesRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /receiving/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-receiving-1\",\"cloudComponentHostName\":\"com-manh-cp-receiving-b846d59cf-wk9s2\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "receiving",
+    "ruleTypeId": "FinalReturnDispositionRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /receiving/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-receiving-1\",\"cloudComponentHostName\":\"com-manh-cp-receiving-b846d59cf-wk9s2\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "receiving",
+    "ruleTypeId": "ServiceAssignmentRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /receiving/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-receiving-1\",\"cloudComponentHostName\":\"com-manh-cp-receiving-b846d59cf-wk9s2\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "receiving",
+    "ruleTypeId": "EventConfigRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /receiving/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-receiving-1\",\"cloudComponentHostName\":\"com-manh-cp-receiving-b846d59cf-wk9s2\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "receiving",
+    "ruleTypeId": "AsnPlanningRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /receiving/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-receiving-1\",\"cloudComponentHostName\":\"com-manh-cp-receiving-b846d59cf-wk9s2\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "receiving",
+    "ruleTypeId": "ReceivingLineOverrideRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /receiving/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-receiving-1\",\"cloudComponentHostName\":\"com-manh-cp-receiving-b846d59cf-wk9s2\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "receiving",
+    "ruleTypeId": "TrailerSelectionRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /receiving/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-receiving-1\",\"cloudComponentHostName\":\"all-com-manh-cp-receiving-68f8f59f78-9wldk\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "receiving",
+    "ruleTypeId": "PostReceivingRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /receiving/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-receiving-1\",\"cloudComponentHostName\":\"com-manh-cp-receiving-b846d59cf-wk9s2\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "receiving",
+    "ruleTypeId": "ReceivingOverrideRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /receiving/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-receiving-1\",\"cloudComponentHostName\":\"com-manh-cp-receiving-b846d59cf-wk9s2\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "receiving",
+    "ruleTypeId": "CollectorDetermination",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /receiving/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-receiving-1\",\"cloudComponentHostName\":\"com-manh-cp-receiving-b846d59cf-wk9s2\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcinventory",
+    "ruleTypeId": "TriggerCountTaskCreationRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcinventory/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcinventory-1\",\"cloudComponentHostName\":\"com-manh-cp-dcinventory-5b8bf56b56-4wqfj\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcinventory",
+    "ruleTypeId": "RecallInventory",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcinventory/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcinventory-1\",\"cloudComponentHostName\":\"all-com-manh-cp-dcinventory-68648d489f-gjn7x\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcinventory",
+    "ruleTypeId": "IncubationRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcinventory/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcinventory-1\",\"cloudComponentHostName\":\"all-com-manh-cp-dcinventory-68648d489f-gjn7x\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcinventory",
+    "ruleTypeId": "LpnSizeTypeDeterminationRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcinventory/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcinventory-1\",\"cloudComponentHostName\":\"all-com-manh-cp-dcinventory-68648d489f-gjn7x\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcinventory",
+    "ruleTypeId": "ItemGroupRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcinventory/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcinventory-1\",\"cloudComponentHostName\":\"all-com-manh-cp-dcinventory-68648d489f-gjn7x\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcinventory",
+    "ruleTypeId": "CountTaskSequenceRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcinventory/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcinventory-1\",\"cloudComponentHostName\":\"com-manh-cp-dcinventory-5b8bf56b56-4wqfj\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcinventory",
+    "ruleTypeId": "EventConfigRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcinventory/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcinventory-1\",\"cloudComponentHostName\":\"com-manh-cp-dcinventory-5b8bf56b56-4wqfj\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcinventory",
+    "ruleTypeId": "AssetInventoryDeterminationCriteria",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcinventory/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcinventory-1\",\"cloudComponentHostName\":\"com-manh-cp-dcinventory-5b8bf56b56-4wqfj\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcinventory",
+    "ruleTypeId": "AssetDeterminationRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcinventory/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcinventory-1\",\"cloudComponentHostName\":\"all-com-manh-cp-dcinventory-68648d489f-gjn7x\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcinventory",
+    "ruleTypeId": "LeanTimeSelectionCriteria",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcinventory/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcinventory-1\",\"cloudComponentHostName\":\"com-manh-cp-dcinventory-5b8bf56b56-4wqfj\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcorder",
+    "ruleTypeId": "ShipConfirmOrderSelection",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcorder/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcorder-1\",\"cloudComponentHostName\":\"com-manh-cp-dcorder-647c6dbf5f-4dc4h\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcorder",
+    "ruleTypeId": "PipelineDetermination",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcorder/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcorder-1\",\"cloudComponentHostName\":\"com-manh-cp-dcorder-647c6dbf5f-4dc4h\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcorder",
+    "ruleTypeId": "PreShipConfirmDetermination",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcorder/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcorder-1\",\"cloudComponentHostName\":\"com-manh-cp-dcorder-647c6dbf5f-4dc4h\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcorder",
+    "ruleTypeId": "CubingEstimation",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcorder/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcorder-1\",\"cloudComponentHostName\":\"all-com-manh-cp-dcorder-576cb44984-nr4r2\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcorder",
+    "ruleTypeId": "EventConfigRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcorder/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcorder-1\",\"cloudComponentHostName\":\"com-manh-cp-dcorder-647c6dbf5f-4dc4h\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcorder",
+    "ruleTypeId": "AggregationDetermination",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcorder/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcorder-1\",\"cloudComponentHostName\":\"com-manh-cp-dcorder-647c6dbf5f-4dc4h\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcorder",
+    "ruleTypeId": "PrioritizationDetermination",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcorder/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcorder-1\",\"cloudComponentHostName\":\"all-com-manh-cp-dcorder-576cb44984-nr4r2\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcorder",
+    "ruleTypeId": "FlowthroughSelection",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcorder/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcorder-1\",\"cloudComponentHostName\":\"com-manh-cp-dcorder-647c6dbf5f-4dc4h\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcorder",
+    "ruleTypeId": "Selection",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcorder/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcorder-1\",\"cloudComponentHostName\":\"com-manh-cp-dcorder-647c6dbf5f-4dc4h\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcorder",
+    "ruleTypeId": "Chase Selection",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcorder/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcorder-1\",\"cloudComponentHostName\":\"com-manh-cp-dcorder-647c6dbf5f-4dc4h\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "putaway",
+    "ruleTypeId": "TaskCreationFromTaskDetails",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /putaway/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-putaway-1\",\"cloudComponentHostName\":\"all-com-manh-cp-putaway-6cc4dd5b59-tzfhg\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "putaway",
+    "ruleTypeId": "MakePutCartCriteriaRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /putaway/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-putaway-1\",\"cloudComponentHostName\":\"all-com-manh-cp-putaway-6cc4dd5b59-tzfhg\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "putaway",
+    "ruleTypeId": "EventConfigRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /putaway/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-putaway-1\",\"cloudComponentHostName\":\"all-com-manh-cp-putaway-6cc4dd5b59-tzfhg\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "putaway",
+    "ruleTypeId": "PlanningCriteria",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /putaway/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-putaway-1\",\"cloudComponentHostName\":\"all-com-manh-cp-putaway-6cc4dd5b59-tzfhg\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "putaway",
+    "ruleTypeId": "TaskCreationSequencingCriteriaRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /putaway/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-putaway-1\",\"cloudComponentHostName\":\"all-com-manh-cp-putaway-6cc4dd5b59-tzfhg\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "putaway",
+    "ruleTypeId": "ExecutionCriteria",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /putaway/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-putaway-1\",\"cloudComponentHostName\":\"all-com-manh-cp-putaway-6cc4dd5b59-tzfhg\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "task",
+    "ruleTypeId": "TaskEligibilityCriteria",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /task/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-task-1\",\"cloudComponentHostName\":\"com-manh-cp-task-5dc9cc9966-gzfmm\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "task",
+    "ruleTypeId": "TaskPoolRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /task/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-task-1\",\"cloudComponentHostName\":\"com-manh-cp-task-5dc9cc9966-gzfmm\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "task",
+    "ruleTypeId": "TaskPoolSequencingRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /task/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-task-1\",\"cloudComponentHostName\":\"com-manh-cp-task-5dc9cc9966-gzfmm\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "task",
+    "ruleTypeId": "EventConfigRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /task/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-task-1\",\"cloudComponentHostName\":\"com-manh-cp-task-5dc9cc9966-gzfmm\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "task",
+    "ruleTypeId": "TaskEligibilityRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /task/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-task-1\",\"cloudComponentHostName\":\"com-manh-cp-task-5dc9cc9966-gzfmm\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "task",
+    "ruleTypeId": "TaskReleaseGroupRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /task/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-task-1\",\"cloudComponentHostName\":\"com-manh-cp-task-5dc9cc9966-gzfmm\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "task",
+    "ruleTypeId": "TaskReleaseGroupBreakCriteria",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /task/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-task-1\",\"cloudComponentHostName\":\"com-manh-cp-task-5dc9cc9966-gzfmm\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "task",
+    "ruleTypeId": "TaskReleaseGroupSequencingCriteriaRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /task/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-task-1\",\"cloudComponentHostName\":\"com-manh-cp-task-5dc9cc9966-gzfmm\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "task",
+    "ruleTypeId": "TaskInventoryCheckRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /task/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-task-1\",\"cloudComponentHostName\":\"com-manh-cp-task-5dc9cc9966-gzfmm\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "task",
+    "ruleTypeId": "TaskInventoryCheckSequencingRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /task/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-task-1\",\"cloudComponentHostName\":\"com-manh-cp-task-5dc9cc9966-gzfmm\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcallocation",
+    "ruleTypeId": "ReplenishmentInventoryCriteria",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcallocation/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcallocation-1\",\"cloudComponentHostName\":\"all-com-manh-cp-dcallocation-85678f8865-6jcp8\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcallocation",
+    "ruleTypeId": "OrderCriteria",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcallocation/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcallocation-1\",\"cloudComponentHostName\":\"all-com-manh-cp-dcallocation-85678f8865-6jcp8\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcallocation",
+    "ruleTypeId": "AllocationInventoryCriteria",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcallocation/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcallocation-1\",\"cloudComponentHostName\":\"com-manh-cp-dcallocation-794784ffc4-gbgl7\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcallocation",
+    "ruleTypeId": "AssignmentCriteria",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcallocation/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcallocation-1\",\"cloudComponentHostName\":\"all-com-manh-cp-dcallocation-85678f8865-6jcp8\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcallocation",
+    "ruleTypeId": "OrderLineSequence",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcallocation/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcallocation-1\",\"cloudComponentHostName\":\"all-com-manh-cp-dcallocation-85678f8865-6jcp8\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcallocation",
+    "ruleTypeId": "ReplenishStorageCriteria",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcallocation/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcallocation-1\",\"cloudComponentHostName\":\"com-manh-cp-dcallocation-794784ffc4-gbgl7\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcallocation",
+    "ruleTypeId": "ReplenishStorageOverrideCriteria",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcallocation/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcallocation-1\",\"cloudComponentHostName\":\"com-manh-cp-dcallocation-794784ffc4-gbgl7\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcallocation",
+    "ruleTypeId": "AllocationBreakCriteria",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcallocation/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcallocation-1\",\"cloudComponentHostName\":\"all-com-manh-cp-dcallocation-85678f8865-6jcp8\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "dcallocation",
+    "ruleTypeId": "EventConfigRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /dcallocation/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-dcallocation-1\",\"cloudComponentHostName\":\"com-manh-cp-dcallocation-794784ffc4-gbgl7\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "EventDetectedShipmentUpdatesRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"all-com-manh-cp-shipment-6cffd8c9d5-pd7sj\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "CollectorDetermination",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"com-manh-cp-shipment-5c94dd7676-244ch\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "PipelineDetermination",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"com-manh-cp-shipment-5c94dd7676-244ch\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "EventConfigRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"com-manh-cp-shipment-5c94dd7676-244ch\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "BroadcastDetermination",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"all-com-manh-cp-shipment-6cffd8c9d5-pd7sj\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "ProofOfDeliveryConfigDetermination",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"all-com-manh-cp-shipment-6cffd8c9d5-pd7sj\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "ShipmentTransitStatusDetermination",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"com-manh-cp-shipment-5c94dd7676-244ch\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "StopNotificationEventConfigRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"com-manh-cp-shipment-5c94dd7676-244ch\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "AutoAppointmentEventConfigRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"com-manh-cp-shipment-5c94dd7676-244ch\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "ShipmentConfigDetermination",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"all-com-manh-cp-shipment-6cffd8c9d5-pd7sj\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "ShipmentSelectionCriteriaRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"all-com-manh-cp-shipment-6cffd8c9d5-pd7sj\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "DigitalBrokerSelectionCriteriaRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"com-manh-cp-shipment-5c94dd7676-244ch\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "CostModificationRequestEventConfigRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"com-manh-cp-shipment-5c94dd7676-244ch\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "EDIForTenderOutEventRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"com-manh-cp-shipment-5c94dd7676-244ch\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "AutoBroadcastShipmentConfigRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"all-com-manh-cp-shipment-6cffd8c9d5-pd7sj\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "ShipmentTrackingEventRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"all-com-manh-cp-shipment-6cffd8c9d5-pd7sj\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "ReadyForWaveConfigRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"all-com-manh-cp-shipment-6cffd8c9d5-pd7sj\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "IncotermConfigRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"com-manh-cp-shipment-5c94dd7676-244ch\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "CumulativeDistanceGroupingCriteriaRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"com-manh-cp-shipment-5c94dd7676-244ch\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "TripChangeRuleType",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"com-manh-cp-shipment-5c94dd7676-244ch\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "PlanningDetermination",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"all-com-manh-cp-shipment-6cffd8c9d5-pd7sj\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  },
+  {
+    "component": "shipment",
+    "ruleTypeId": "OnTimeTolerance",
+    "step": "ruleTypeEntityXref/search",
+    "error": "HTTP 404 /shipment/api/rules/ruleTypeEntityXref/search: {\"success\":false,\"header\":null,\"data\":null,\"messageKey\":\"error.404\",\"message\":\"error.404\",\"errors\":[],\"exceptions\":[],\"messages\":{\"Message\":[],\"Size\":0},\"rootCause\":null,\"cloudComponent\":\"com-manh-cp-shipment-1\",\"cloudComponentHostName\":\"com-manh-cp-shipment-5c94dd7676-244ch\",\"requestUri\":\"/error\",\"statusCode\":\"OK\"}"
+  }
+]

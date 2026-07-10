@@ -58,6 +58,12 @@ function upsertEntityRecord(orgDraft, scope, entityKey, record) {
   const client = findClientNode(orgDraft, scope.facilityId, scope.businessUnitId, scope.clientId);
   if (!client) return false;
   if (!client[entityKey]) client[entityKey] = [];
+  if (
+    (entityKey === "rulesTransaction" || entityKey === "rulesStorage") &&
+    window.BillingRuleBuilder?.normalizeRuleRecord
+  ) {
+    record = window.BillingRuleBuilder.normalizeRuleRecord(record);
+  }
   const list = client[entityKey];
   const idx = list.findIndex((r) => r.id === record.id);
   if (idx >= 0) list[idx] = record;

@@ -110,6 +110,57 @@
                   "active": true
                 },
                 {
+                  "id": "rule-recv-attr",
+                  "name": "Receiving by inventory attribute",
+                  "activityId": "act-recv-pallet",
+                  "rateCardId": "rc-recv-pallet",
+                  "ruleType": "transaction",
+                  "chargeSumType": "line",
+                  "chargeType": "conditionalPer",
+                  "uom": "Case",
+                  "priority": 15,
+                  "active": true,
+                  "attributeSource": {
+                    "component": "receiving",
+                    "ruleTypeId": null
+                  },
+                  "branches": [
+                    {
+                      "id": "br-hazmat",
+                      "label": "HAZMAT",
+                      "match": {
+                        "logic": "and",
+                        "conditions": [
+                          {
+                            "entity": "lpnDetail",
+                            "attribute": "InventoryAttribute1",
+                            "operator": "eq",
+                            "value": "HAZMAT"
+                          }
+                        ]
+                      },
+                      "charge": { "type": "per", "rate": 1.5 }
+                    },
+                    {
+                      "id": "br-standard",
+                      "label": "STANDARD",
+                      "match": {
+                        "logic": "and",
+                        "conditions": [
+                          {
+                            "entity": "lpnDetail",
+                            "attribute": "InventoryAttribute1",
+                            "operator": "eq",
+                            "value": "STANDARD"
+                          }
+                        ]
+                      },
+                      "charge": { "type": "per", "rate": 1.0 }
+                    }
+                  ],
+                  "defaultCharge": { "type": "per", "rate": 0.75 }
+                },
+                {
                   "id": "rule-case-tier",
                   "name": "Case pick tier pricing",
                   "activityId": "act-case-pick",

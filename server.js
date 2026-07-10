@@ -6,7 +6,7 @@ const fetch = require("node-fetch");
 const app = express();
 app.use(express.json({ limit: "10mb" }));
 
-const STATIC_ASSETS = ["shared.css", "app.js", "config-ui.js", "config-admin.js"];
+const STATIC_ASSETS = ["shared.css", "app.js", "config-ui.js", "config-admin.js", "rule-builder.js"];
 STATIC_ASSETS.forEach((file) => {
   app.get("/" + file, (req, res, next) => {
     const publicPath = path.join(__dirname, "public", file);

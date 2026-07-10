@@ -961,3 +961,47 @@ table.ft-table th.col-selected-h {
 .app-status.text-success { color: #86efac !important; }
 .app-status.text-danger { color: #fca5a5 !important; }
 .app-status.text-warning { color: #fcd34d !important; }
+
+/* Conditional rule builder */
+.rule-builder-host {
+  border-top: 1px solid var(--border);
+  padding-top: 0.75rem;
+}
+
+.rule-builder .card-panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  padding: 0.75rem;
+  margin-bottom: 0.65rem;
+}
+
+.rule-builder .rb-branch-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.rule-builder .rb-branch-label {
+  max-width: 12rem;
+}
+
+.rule-builder .rb-condition {
+  display: grid;
+  grid-template-columns: minmax(5rem, 0.8fr) minmax(8rem, 1.4fr) minmax(4.5rem, 0.7fr) minmax(5rem, 1fr) auto;
+  gap: 0.35rem;
+  align-items: center;
+  margin-bottom: 0.35rem;
+}
+
+.rule-builder .rb-inv-meta {
+  opacity: 0.75;
+}
+
+@media (max-width: 768px) {
+  .rule-builder .rb-condition {
+    grid-template-columns: 1fr;
+  }
+}

@@ -23,7 +23,7 @@
   ],
   "headers": [
     {
-      "source": "/(shared\\.css|app\\.js|config-ui\\.js|config-admin\\.js)",
+      "source": "/(shared\\.css|app\\.js|config-ui\\.js|config-admin\\.js|rule-builder\\.js)",
       "headers": [
         {
           "key": "Cache-Control",

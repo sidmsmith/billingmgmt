@@ -178,6 +178,23 @@ function openEditModal(recordId) {
     ? `Edit ${BillingUI.ENTITY_LABELS[state.activeEntity]}`
     : `Add ${BillingUI.ENTITY_LABELS[state.activeEntity]}`;
   editModalBody.innerHTML = BillingUI.buildEditForm(state.activeEntity, existing || { active: true, billable: true });
+
+  const dialog = editModalEl?.querySelector(".modal-dialog");
+  if (dialog) {
+    const isRule =
+      state.activeEntity === "rulesTransaction" || state.activeEntity === "rulesStorage";
+    dialog.classList.toggle("modal-xl", isRule);
+    dialog.classList.toggle("modal-lg", !isRule);
+  }
+
+  if (window.BillingRuleBuilder?.enhanceEditModal) {
+    window.BillingRuleBuilder.enhanceEditModal(
+      editModalBody,
+      state.activeEntity,
+      existing || { active: true, chargeType: "per" }
+    );
+  }
+
   if (!state.editModal) {
     setStatus("Edit dialog failed to initialize", "danger");
     return;
@@ -185,18 +202,13 @@ function openEditModal(recordId) {
   state.editModal.show();
 }
 
-function deleteRecord(recordId) {
-  if (!window.confirm(`Delete record ${recordId}?`)) return;
-  const scope = getScope();
-  BillingAdmin.deleteEntityRecord(state.orgDraft, scope, state.activeEntity, recordId);
-  renderTable();
-  setStatus("Record deleted (local draft)", "warning", 3000);
-}
-
 function saveEditModal() {
   try {
     const record = BillingUI.readEditForm(editModalBody, state.activeEntity);
     if (!record.id) record.id = BillingUI.newRecordId(state.activeEntity);
+    if (window.BillingRuleBuilder?.applyToRecord) {
+      window.BillingRuleBuilder.applyToRecord(editModalBody, record);
+    }
     const scope = getScope();
     BillingAdmin.upsertEntityRecord(state.orgDraft, scope, state.activeEntity, record);
     state.editModal.hide();
@@ -205,6 +217,14 @@ function saveEditModal() {
   } catch (err) {
     setStatus(err.message || "Validation failed", "danger");
   }
+}
+
+function deleteRecord(recordId) {
+  if (!window.confirm(`Delete record ${recordId}?`)) return;
+  const scope = getScope();
+  BillingAdmin.deleteEntityRecord(state.orgDraft, scope, state.activeEntity, recordId);
+  renderTable();
+  setStatus("Record deleted (local draft)", "warning", 3000);
 }
 
 async function loadDefaultConfig() {
