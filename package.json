@@ -1,0 +1,17 @@
+{
+  "name": "billingmgmt",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "node-fetch": "^2.7.0"
+  },
+  "description": "Billing Management — configure warehouse billing rules",
+  "main": "server.js",
+  "license": "ISC",
+  "type": "commonjs"
+}

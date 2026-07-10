@@ -1,0 +1,279 @@
+{
+  "version": "1.0.0",
+  "facilities": [
+    {
+      "id": "SS-DEMO-DM1",
+      "name": "Demo Facility East",
+      "businessUnits": [
+        {
+          "id": "BU-RETAIL",
+          "name": "Retail Operations",
+          "clients": [
+            {
+              "id": "ACME-3PL",
+              "name": "ACME 3PL",
+              "clientActivities": [
+                {
+                  "id": "act-recv-pallet",
+                  "activityType": "Receiving",
+                  "activityCode": "RECV_PALLET",
+                  "description": "Inbound receiving by pallet",
+                  "billable": true,
+                  "triggerMode": "inline",
+                  "billToCode": "ACME-MAIN"
+                },
+                {
+                  "id": "act-case-pick",
+                  "activityType": "Picking",
+                  "activityCode": "CASE_PICK",
+                  "description": "Case pick handling",
+                  "billable": true,
+                  "triggerMode": "inline",
+                  "billToCode": "ACME-MAIN"
+                },
+                {
+                  "id": "act-storage",
+                  "activityType": "Storage",
+                  "activityCode": "STORAGE",
+                  "description": "Monthly storage charges",
+                  "billable": true,
+                  "triggerMode": "manual",
+                  "billToCode": "ACME-MAIN"
+                },
+                {
+                  "id": "act-recurring",
+                  "activityType": "Service",
+                  "activityCode": "DEDICATED_SPACE",
+                  "description": "Dedicated space recurring fee",
+                  "billable": true,
+                  "triggerMode": "manual",
+                  "billToCode": "ACME-MAIN"
+                }
+              ],
+              "rateCards": [
+                {
+                  "id": "rc-recv-pallet",
+                  "name": "Receiving per pallet",
+                  "uom": "Pallet",
+                  "rate": 4.5,
+                  "glCode": "4100-RECV",
+                  "effectiveFrom": "2025-01-01",
+                  "effectiveTo": null
+                },
+                {
+                  "id": "rc-case-pick",
+                  "name": "Case pick per case",
+                  "uom": "Case",
+                  "rate": 0.35,
+                  "glCode": "4200-PICK",
+                  "effectiveFrom": "2025-01-01",
+                  "effectiveTo": null
+                },
+                {
+                  "id": "rc-storage-snap",
+                  "name": "Storage snapshot",
+                  "uom": "Pallet",
+                  "rate": 12.0,
+                  "glCode": "4300-STOR",
+                  "effectiveFrom": "2025-01-01",
+                  "effectiveTo": null
+                },
+                {
+                  "id": "rc-recurring",
+                  "name": "Dedicated space monthly",
+                  "uom": "Month",
+                  "rate": 2500.0,
+                  "glCode": "4400-RENT",
+                  "effectiveFrom": "2025-01-01",
+                  "effectiveTo": null
+                }
+              ],
+              "rulesTransaction": [
+                {
+                  "id": "rule-recv-pallet",
+                  "name": "Receiving by pallet",
+                  "activityId": "act-recv-pallet",
+                  "rateCardId": "rc-recv-pallet",
+                  "ruleType": "transaction",
+                  "chargeSumType": "transaction",
+                  "chargeType": "per",
+                  "priority": 10,
+                  "minCharge": 0,
+                  "maxCharge": null,
+                  "conditions": [
+                    { "field": "orderType", "operator": "in", "value": "PO,ASN" }
+                  ],
+                  "active": true
+                },
+                {
+                  "id": "rule-case-tier",
+                  "name": "Case pick tier pricing",
+                  "activityId": "act-case-pick",
+                  "rateCardId": "rc-case-pick",
+                  "ruleType": "transaction",
+                  "chargeSumType": "line",
+                  "chargeType": "tier",
+                  "priority": 20,
+                  "minCharge": 5.0,
+                  "maxCharge": 500.0,
+                  "tiers": [
+                    { "upTo": 10, "rate": 0.5 },
+                    { "upTo": 100, "rate": 0.35 },
+                    { "upTo": null, "rate": 0.25 }
+                  ],
+                  "conditions": [
+                    { "field": "weightBand", "operator": "lte", "value": "50" }
+                  ],
+                  "active": true
+                },
+                {
+                  "id": "rule-recurring-fixed",
+                  "name": "Dedicated space fee",
+                  "activityId": "act-recurring",
+                  "rateCardId": "rc-recurring",
+                  "ruleType": "transaction",
+                  "chargeSumType": "activity",
+                  "chargeType": "fixed",
+                  "priority": 5,
+                  "recurring": { "frequency": "monthly" },
+                  "minCharge": null,
+                  "maxCharge": null,
+                  "active": true
+                }
+              ],
+              "rulesStorage": [
+                {
+                  "id": "rule-storage-snapshot",
+                  "name": "Snapshot storage (15th)",
+                  "activityId": "act-storage",
+                  "rateCardId": "rc-storage-snap",
+                  "ruleType": "storage",
+                  "storageRuleFamily": "snapshot",
+                  "chargeSumType": "line",
+                  "chargeType": "per",
+                  "snapshotDay": 15,
+                  "priority": 10,
+                  "minCharge": 25.0,
+                  "maxCharge": null,
+                  "active": true
+                },
+                {
+                  "id": "rule-storage-avg",
+                  "name": "Average storage",
+                  "activityId": "act-storage",
+                  "rateCardId": "rc-storage-snap",
+                  "ruleType": "storage",
+                  "storageRuleFamily": "average",
+                  "chargeSumType": "line",
+                  "chargeType": "per",
+                  "priority": 20,
+                  "active": false
+                }
+              ],
+              "billToCodes": [
+                {
+                  "id": "ACME-MAIN",
+                  "name": "ACME Main Billing",
+                  "invoiceGroup": "WAREHOUSE",
+                  "presentationOrder": 1,
+                  "taxPercent": 0,
+                  "active": true
+                }
+              ],
+              "billingLogDefinitions": [
+                {
+                  "id": "bld-recv",
+                  "billToCode": "ACME-MAIN",
+                  "activityId": "act-recv-pallet",
+                  "referenceFields": ["asn", "pallet", "shipment", "item", "location"]
+                },
+                {
+                  "id": "bld-pick",
+                  "billToCode": "ACME-MAIN",
+                  "activityId": "act-case-pick",
+                  "referenceFields": ["order", "orderType", "item", "location"]
+                },
+                {
+                  "id": "bld-storage",
+                  "billToCode": "ACME-MAIN",
+                  "activityId": "act-storage",
+                  "referenceFields": ["item", "location", "pallet", "lot"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SS-DEMO-DM2",
+      "name": "Demo Facility West",
+      "businessUnits": [
+        {
+          "id": "BU-WHOLESALE",
+          "name": "Wholesale Operations",
+          "clients": [
+            {
+              "id": "BETA-CORP",
+              "name": "Beta Corporation",
+              "clientActivities": [
+                {
+                  "id": "act-putaway",
+                  "activityType": "Putaway",
+                  "activityCode": "PUTAWAY_PALLET",
+                  "description": "Putaway handling by pallet",
+                  "billable": true,
+                  "triggerMode": "inline",
+                  "billToCode": "BETA-INV"
+                }
+              ],
+              "rateCards": [
+                {
+                  "id": "rc-putaway",
+                  "name": "Putaway per pallet",
+                  "uom": "Pallet",
+                  "rate": 3.25,
+                  "glCode": "4100-PUT",
+                  "effectiveFrom": "2025-01-01",
+                  "effectiveTo": null
+                }
+              ],
+              "rulesTransaction": [
+                {
+                  "id": "rule-putaway",
+                  "name": "Putaway by pallet",
+                  "activityId": "act-putaway",
+                  "rateCardId": "rc-putaway",
+                  "ruleType": "transaction",
+                  "chargeSumType": "transactionByChargeTag",
+                  "chargeTag": "pallet",
+                  "chargeType": "per",
+                  "priority": 10,
+                  "active": true
+                }
+              ],
+              "rulesStorage": [],
+              "billToCodes": [
+                {
+                  "id": "BETA-INV",
+                  "name": "Beta Invoice Account",
+                  "invoiceGroup": "WAREHOUSE",
+                  "presentationOrder": 1,
+                  "active": true
+                }
+              ],
+              "billingLogDefinitions": [
+                {
+                  "id": "bld-putaway",
+                  "billToCode": "BETA-INV",
+                  "activityId": "act-putaway",
+                  "referenceFields": ["pallet", "location", "item"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
