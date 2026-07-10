@@ -132,8 +132,9 @@
                         "logic": "and",
                         "conditions": [
                           {
-                            "entity": "lpnDetail",
                             "attribute": "InventoryAttribute1",
+                            "objects": ["ASN", "PO", "iLPN"],
+                            "entity": "ASN",
                             "operator": "eq",
                             "value": "HAZMAT"
                           }
@@ -148,8 +149,9 @@
                         "logic": "and",
                         "conditions": [
                           {
-                            "entity": "lpnDetail",
                             "attribute": "InventoryAttribute1",
+                            "objects": ["ASN", "PO", "iLPN"],
+                            "entity": "ASN",
                             "operator": "eq",
                             "value": "STANDARD"
                           }

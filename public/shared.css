@@ -990,10 +990,21 @@ table.ft-table th.col-selected-h {
 
 .rule-builder .rb-condition {
   display: grid;
-  grid-template-columns: minmax(5rem, 0.8fr) minmax(8rem, 1.4fr) minmax(4.5rem, 0.7fr) minmax(5rem, 1fr) auto;
+  grid-template-columns: minmax(12rem, 2fr) minmax(4.5rem, 0.7fr) minmax(5rem, 1fr) auto;
   gap: 0.35rem;
-  align-items: center;
-  margin-bottom: 0.35rem;
+  align-items: start;
+  margin-bottom: 0.5rem;
+}
+
+.rule-builder .rb-attr-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.rule-builder .rb-preview {
+  font-style: italic;
 }
 
 .rule-builder .rb-inv-meta {

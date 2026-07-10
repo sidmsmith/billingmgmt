@@ -16,6 +16,106 @@ const RULE_BUILDER_OPS = [
 
 const VALUELESS_OPS = new Set(["isEmpty", "isNotEmpty"]);
 
+/**
+ * Field → MAWM objects where the field commonly appears.
+ * Built from mawm_api_library search catalogs (ASN, PO, iLPN, oLPN, Order, Item, Location, Shipment, Appointment).
+ * Keys are lowercased attribute names.
+ */
+const FIELD_OBJECTS = {
+  // Identity / links
+  asnid: ["ASN", "PO", "iLPN", "Appointment"],
+  alternateasnid: ["ASN", "Appointment"],
+  purchaseorderid: ["PO", "ASN", "iLPN", "Appointment"],
+  alternatepurchaseorderid: ["PO", "Appointment"],
+  purchaseorderlineid: ["PO", "ASN"],
+  ilpnid: ["iLPN"],
+  lpnid: ["iLPN", "ASN"],
+  parentlpnid: ["iLPN", "ASN"],
+  sourcelpnid: ["iLPN"],
+  olpnid: ["oLPN"],
+  orderid: ["Order", "oLPN"],
+  orderlineid: ["Order", "oLPN"],
+  shipmentid: ["Shipment", "Order", "oLPN", "iLPN", "Appointment"],
+  itemid: ["Item", "ASN", "PO", "iLPN", "Order", "oLPN"],
+  vendorid: ["ASN", "PO", "iLPN", "Appointment"],
+  carrierid: ["ASN", "Shipment", "oLPN", "Appointment"],
+  trailerid: ["ASN", "Appointment"],
+  appointmentid: ["Appointment"],
+  billofladingnumber: ["ASN", "Shipment", "Appointment"],
+  pronumber: ["ASN", "Appointment"],
+  facilityid: ["ASN", "PO", "iLPN", "Order", "oLPN", "Location", "Appointment"],
+  orgid: ["ASN", "PO", "iLPN", "Order", "oLPN", "Shipment", "Appointment"],
+  businessunitid: ["ASN", "PO", "iLPN", "Order"],
+  destinationfacilityid: ["ASN", "PO", "Order", "Appointment"],
+  originfacilityid: ["ASN", "PO", "Order", "oLPN"],
+  // Status
+  asnstaus: ["ASN"],
+  asnstatus: ["ASN"],
+  asnstatusdescription: ["ASN"],
+  asnlevelid: ["ASN"],
+  asnorigintypeid: ["ASN"],
+  purchaseorderstatus: ["PO"],
+  status: ["iLPN", "oLPN", "Order"],
+  minimumstatus: ["Order"],
+  maximumstatus: ["Order"],
+  pipelinestatus: ["Order", "Shipment"],
+  planningstatusid: ["Shipment"],
+  transitstatusid: ["Shipment"],
+  tenderstatusid: ["Shipment"],
+  broadcaststatusid: ["Shipment"],
+  invoicingstatusid: ["Shipment"],
+  warehousestatusid: ["Shipment", "Order"],
+  appointmentstatusid: ["Appointment"],
+  // Attributes
+  inventoryattribute1: ["ASN", "PO", "iLPN"],
+  inventoryattribute2: ["ASN", "PO", "iLPN"],
+  inventoryattribute3: ["ASN", "PO", "iLPN"],
+  inventoryattribute4: ["ASN", "PO", "iLPN"],
+  inventoryattribute5: ["ASN", "PO", "iLPN"],
+  itemattribute1: ["Order", "oLPN"],
+  itemattribute2: ["Order", "oLPN"],
+  itemattribute3: ["Order", "oLPN"],
+  itemattribute4: ["Order", "oLPN"],
+  itemattribute5: ["Order", "oLPN"],
+  batchnumber: ["ASN", "PO", "iLPN", "Order", "oLPN"],
+  productstatusid: ["ASN", "PO", "iLPN", "Order", "oLPN"],
+  countryoforigin: ["ASN", "PO", "iLPN"],
+  // Location / container
+  currentlocationid: ["iLPN", "oLPN"],
+  picklocationid: ["oLPN"],
+  locationid: ["Location"],
+  locationtypeid: ["Location"],
+  // Order / ship
+  ordertype: ["Order", "oLPN"],
+  billingmethodid: ["Order", "Shipment"],
+  billtoname: ["Order", "oLPN"],
+  shipviaid: ["Order", "oLPN", "Shipment"],
+  servicelevelid: ["oLPN", "Shipment"],
+  assignedcarrierid: ["Shipment", "Order"],
+  // Appointment
+  appointmenttypeid: ["Appointment"],
+  contenttype: ["Appointment"],
+  preferreddatetime: ["Appointment"],
+  arrivaldatetime: ["Appointment"],
+  // Item master
+  primarybarcode: ["Item"],
+  description: ["Item", "Order"],
+  productclass: ["Item"],
+  unitprice: ["Item", "Order"],
+  trackitemattribute1: ["Item"],
+  trackitemattribute2: ["Item"],
+  trackitemattribute3: ["Item"],
+  trackitemattribute4: ["Item"],
+  trackitemattribute5: ["Item"],
+  trackbatchnumber: ["Item"],
+  // Quantities
+  shippedquantity: ["ASN", "PO", "Order"],
+  orderedquantity: ["Order", "PO"],
+  pickedquantity: ["oLPN"],
+  packedquantity: ["oLPN", "Order"],
+  allocatedquantity: ["Order", "iLPN"],
+};
+
 let _inventoryCache = null;
 let _inventoryPromise = null;
 
@@ -27,24 +127,60 @@ function escapeRb(text) {
     .replace(/"/g, "&quot;");
 }
 
+function resolveFieldObjects(attributeName) {
+  if (!attributeName) return [];
+  const key = String(attributeName).toLowerCase();
+  if (FIELD_OBJECTS[key]) return FIELD_OBJECTS[key].slice();
+  // Pattern families
+  if (/^inventoryattribute[1-5]$/i.test(key)) return ["ASN", "PO", "iLPN"];
+  if (/^itemattribute[1-5]$/i.test(key)) return ["Order", "oLPN"];
+  if (/^trackitemattribute[1-5]$/i.test(key)) return ["Item"];
+  if (/^allowmixinginventoryattr[1-5]$/i.test(key)) return ["Location"];
+  return [];
+}
+
+function displayLabelForAttr(a) {
+  const objects = a.objects?.length ? a.objects : resolveFieldObjects(a.attribute);
+  const name = a.attribute || a.key;
+  if (objects.length) return `${name} — ${objects.join(", ")}`;
+  return String(name);
+}
+
+function enrichInventory(inventory) {
+  const attrs = inventory?.billingIndex?.attributes || [];
+  for (const a of attrs) {
+    const objects = resolveFieldObjects(a.attribute);
+    a.objects = objects;
+    if (!a.entity || a.entity === "unknown" || a.entity === "None") {
+      a.entity = objects[0] || "";
+    }
+    a.label = displayLabelForAttr(a);
+    // Rebuild key for UI uniqueness but keep original key if present
+    if (!a.key || a.key.includes(".unknown.")) {
+      a.key = `${a.component}.${(a.entity || "field").toLowerCase()}.${a.attribute}`.toLowerCase();
+    }
+  }
+  return inventory;
+}
+
 async function loadInventory() {
   if (_inventoryCache) return _inventoryCache;
   if (_inventoryPromise) return _inventoryPromise;
   _inventoryPromise = fetch("/data/rule_inventory/rule_inventory.json")
     .then(async (res) => {
       if (!res.ok) throw new Error(`Inventory HTTP ${res.status}`);
-      const data = await res.json();
+      const data = enrichInventory(await res.json());
       _inventoryCache = data;
       return data;
     })
     .catch((err) => {
       _inventoryPromise = null;
       console.warn("[rule-builder] inventory load failed", err);
-      return {
+      return enrichInventory({
         billingIndex: { byActivityHint: {}, attributes: [] },
         components: [],
         note: String(err.message || err),
-      };
+      });
     });
   return _inventoryPromise;
 }
@@ -70,11 +206,20 @@ function filterAttributes(inventory, { component, query }) {
   const q = (query || "").trim().toLowerCase();
   if (q) {
     attrs = attrs.filter((a) => {
-      const hay = `${a.key} ${a.label || ""} ${a.attribute || ""} ${a.entity || ""}`.toLowerCase();
+      const hay = `${a.attribute || ""} ${a.label || ""} ${(a.objects || []).join(" ")} ${a.key || ""}`.toLowerCase();
       return hay.includes(q);
     });
   }
-  return attrs.slice(0, 400);
+  // Prefer enriched / known fields first when browsing without search
+  if (!q) {
+    attrs = [...attrs].sort((a, b) => {
+      const ae = a.objects?.length ? 0 : 1;
+      const be = b.objects?.length ? 0 : 1;
+      if (ae !== be) return ae - be;
+      return String(a.attribute || "").localeCompare(String(b.attribute || ""));
+    });
+  }
+  return attrs.slice(0, 300);
 }
 
 function opNeedsValue(op) {
@@ -82,10 +227,11 @@ function opNeedsValue(op) {
 }
 
 function summarizeCondition(c) {
-  const left = [c.entity, c.attribute].filter(Boolean).join(".") || c.attribute || "?";
+  const left = c.attribute || "?";
   const op = RULE_BUILDER_OPS.find((o) => o.id === c.operator)?.label || c.operator;
   if (!opNeedsValue(c.operator)) return `${left} ${op}`;
-  return `${left} ${op} ${c.value ?? ""}`;
+  const val = c.value == null || c.value === "" ? "…" : c.value;
+  return `${left} ${op} ${val}`;
 }
 
 function summarizeBranch(branch) {
@@ -95,10 +241,11 @@ function summarizeBranch(branch) {
     ? conds.map(summarizeCondition).join(` ${logic} `)
     : "(no conditions)";
   const charge = branch?.charge || {};
+  const rateNum = Number(charge.rate || 0);
   const rate =
     charge.type === "fixed"
-      ? `$${Number(charge.rate || 0).toFixed(2)} fixed`
-      : `$${Number(charge.rate || 0).toFixed(2)} / unit`;
+      ? `$${rateNum.toFixed(2)} fixed`
+      : `$${rateNum.toFixed(2)} / unit`;
   return `If ${matchText} → ${rate}`;
 }
 
@@ -108,14 +255,7 @@ function defaultBranch() {
     label: "",
     match: {
       logic: "and",
-      conditions: [
-        {
-          entity: "",
-          attribute: "",
-          operator: "eq",
-          value: "",
-        },
-      ],
+      conditions: [{ attribute: "", operator: "eq", value: "", objects: [] }],
     },
     charge: { type: "per", rate: 0 },
   };
@@ -135,44 +275,44 @@ function ensureConditionalShape(record) {
   return next;
 }
 
-function renderConditionRow(cond, attrOptionsHtml) {
+function attrOptionsFor(inventory, component, selectedAttr, query) {
+  const attrs = filterAttributes(inventory, { component, query: query || "" });
+  const opts = [`<option value="">— select attribute —</option>`];
+  let matched = false;
+  for (const a of attrs) {
+    const sel = a.attribute === selectedAttr;
+    if (sel) matched = true;
+    const objects = (a.objects || []).join(",");
+    opts.push(
+      `<option value="${escapeRb(a.key)}" data-attribute="${escapeRb(a.attribute || "")}" data-objects="${escapeRb(objects)}"${sel ? " selected" : ""}>${escapeRb(displayLabelForAttr(a))}</option>`
+    );
+  }
+  if (selectedAttr && !matched) {
+    const objects = resolveFieldObjects(selectedAttr);
+    const key = `custom.field.${selectedAttr}`;
+    opts.push(
+      `<option value="${escapeRb(key)}" data-attribute="${escapeRb(selectedAttr)}" data-objects="${escapeRb(objects.join(","))}" selected>${escapeRb(displayLabelForAttr({ attribute: selectedAttr, objects }))}</option>`
+    );
+  }
+  return opts.join("");
+}
+
+function renderConditionRow(cond, inventory, component) {
   const needsVal = opNeedsValue(cond.operator || "eq");
   const opOpts = RULE_BUILDER_OPS.map(
     (o) =>
       `<option value="${o.id}"${(cond.operator || "eq") === o.id ? " selected" : ""}>${escapeRb(o.label)}</option>`
   ).join("");
+  const attrHtml = attrOptionsFor(inventory, component, cond.attribute, "");
   return `<div class="rb-condition" data-role="condition">
-    <input class="form-control form-control-sm" data-field="entity" placeholder="entity" value="${escapeRb(cond.entity || "")}" list="rb-entity-hints" />
-    <select class="form-select form-select-sm" data-field="attributeKey">${attrOptionsHtml}</select>
+    <div class="rb-attr-picker">
+      <input class="form-control form-control-sm" data-field="attrSearch" type="search" placeholder="Search attributes…" autocomplete="off" />
+      <select class="form-select form-select-sm" data-field="attributeKey">${attrHtml}</select>
+    </div>
     <select class="form-select form-select-sm" data-field="operator">${opOpts}</select>
     <input class="form-control form-control-sm" data-field="value" placeholder="value" value="${escapeRb(cond.value ?? "")}" ${needsVal ? "" : "disabled"} />
     <button type="button" class="btn btn-link btn-sm text-danger" data-action="remove-condition" title="Remove condition">&times;</button>
   </div>`;
-}
-
-function attrOptionsFor(inventory, component, selectedAttr, selectedEntity) {
-  const attrs = filterAttributes(inventory, { component, query: "" });
-  const opts = [`<option value="">— select attribute —</option>`];
-  let matched = false;
-  for (const a of attrs) {
-    const sel =
-      a.attribute === selectedAttr &&
-      (selectedEntity == null || selectedEntity === "" || a.entity === selectedEntity || !a.entity);
-    if (sel) matched = true;
-    const label = a.entity
-      ? `${a.entity}.${a.attribute}`
-      : a.attribute;
-    opts.push(
-      `<option value="${escapeRb(a.key)}" data-entity="${escapeRb(a.entity || "")}" data-attribute="${escapeRb(a.attribute || "")}"${sel ? " selected" : ""}>${escapeRb(label)}</option>`
-    );
-  }
-  if (selectedAttr && !matched) {
-    const key = `custom.${selectedEntity || "unknown"}.${selectedAttr}`;
-    opts.push(
-      `<option value="${escapeRb(key)}" data-entity="${escapeRb(selectedEntity || "")}" data-attribute="${escapeRb(selectedAttr)}" selected>${escapeRb([selectedEntity, selectedAttr].filter(Boolean).join(".") || selectedAttr)} (custom)</option>`
-    );
-  }
-  return opts.join("");
 }
 
 function renderBuilderHtml(record, inventory) {
@@ -186,7 +326,7 @@ function renderBuilderHtml(record, inventory) {
   const branchHtml = shaped.branches
     .map((branch, idx) => {
       const condHtml = (branch.match?.conditions || [])
-        .map((c) => renderConditionRow(c, attrOptionsFor(inventory, component, c.attribute, c.entity)))
+        .map((c) => renderConditionRow(c, inventory, component))
         .join("");
       const chargeType = branch.charge?.type || "per";
       return `<div class="rb-branch card-panel" data-role="branch" data-branch-id="${escapeRb(branch.id)}">
@@ -214,7 +354,7 @@ function renderBuilderHtml(record, inventory) {
             <input class="form-control form-control-sm" type="number" step="0.01" data-field="rate" value="${escapeRb(branch.charge?.rate ?? 0)}" />
           </div>
         </div>
-        <p class="rb-preview small text-muted mb-0 mt-2">${escapeRb(summarizeBranch(branch))}</p>
+        <p class="rb-preview small text-muted mb-0 mt-2" data-role="preview">${escapeRb(summarizeBranch(branch))}</p>
       </div>`;
     })
     .join("");
@@ -227,31 +367,17 @@ function renderBuilderHtml(record, inventory) {
   return `<div class="rule-builder" data-role="rule-builder">
     <div class="rb-header">
       <h6 class="mb-1">Conditional charges</h6>
-      <p class="small text-muted mb-2">If attribute matches → rate. First matching branch wins; optional default/else below. <span class="rb-inv-meta">${escapeRb(crawled)}</span></p>
+      <p class="small text-muted mb-2">Pick an attribute, set a match and rate. First matching branch wins; optional default/else below. <span class="rb-inv-meta">${escapeRb(crawled)}</span></p>
       <div class="row g-2 align-items-end mb-2">
-        <div class="col-md-4">
+        <div class="col-md-6">
           <label class="form-label mb-0 small">Attribute source (component)</label>
           <select class="form-select form-select-sm" data-field="component">${compOpts || '<option value="receiving">receiving</option>'}</select>
-        </div>
-        <div class="col-md-5">
-          <label class="form-label mb-0 small">Filter attributes</label>
-          <input class="form-control form-control-sm" data-field="attrFilter" placeholder="Search attributes…" />
         </div>
         <div class="col-md-3">
           <button type="button" class="btn btn-outline-primary btn-sm w-100" data-action="add-branch">+ branch</button>
         </div>
       </div>
     </div>
-    <datalist id="rb-entity-hints">
-      <option value="asn"></option>
-      <option value="lpnDetail"></option>
-      <option value="ilpn"></option>
-      <option value="order"></option>
-      <option value="orderLine"></option>
-      <option value="olpn"></option>
-      <option value="item"></option>
-      <option value="shipment"></option>
-    </datalist>
     <div class="rb-branches" data-role="branches">${branchHtml}</div>
     <div class="rb-default card-panel mt-2">
       <strong>Default / else</strong>
@@ -274,18 +400,29 @@ function readConditionEl(el) {
   const op = el.querySelector('[data-field="operator"]')?.value || "eq";
   const attrSel = el.querySelector('[data-field="attributeKey"]');
   const opt = attrSel?.selectedOptions?.[0];
-  let entity = el.querySelector('[data-field="entity"]')?.value?.trim() || "";
   let attribute = "";
+  let objects = [];
   if (opt && opt.value) {
     attribute = opt.dataset.attribute || "";
-    if (!entity && opt.dataset.entity) entity = opt.dataset.entity;
+    objects = (opt.dataset.objects || "")
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
   }
   if (!attribute && attrSel?.value) {
     const parts = attrSel.value.split(".");
     attribute = parts[parts.length - 1] || "";
+    objects = resolveFieldObjects(attribute);
   }
+  if (!objects.length && attribute) objects = resolveFieldObjects(attribute);
   const value = opNeedsValue(op) ? el.querySelector('[data-field="value"]')?.value ?? "" : null;
-  return { entity, attribute, operator: op, value };
+  return {
+    attribute,
+    objects,
+    entity: objects[0] || "",
+    operator: op,
+    value,
+  };
 }
 
 function collectFromHost(host) {
@@ -298,7 +435,7 @@ function collectFromHost(host) {
     const conditions = [];
     branchEl.querySelectorAll('[data-role="condition"]').forEach((cEl) => {
       const c = readConditionEl(cEl);
-      if (c.attribute || c.entity) conditions.push(c);
+      if (c.attribute) conditions.push(c);
     });
     const rateRaw = branchEl.querySelector('[data-field="rate"]')?.value;
     branches.push({
@@ -325,6 +462,29 @@ function collectFromHost(host) {
   };
 }
 
+function refreshBranchPreview(branchEl) {
+  const preview = branchEl.querySelector('[data-role="preview"]');
+  if (!preview) return;
+  const conditions = [];
+  branchEl.querySelectorAll('[data-role="condition"]').forEach((cEl) => {
+    const c = readConditionEl(cEl);
+    if (c.attribute) conditions.push(c);
+    else conditions.push({ attribute: "…", operator: c.operator, value: c.value });
+  });
+  const rateRaw = branchEl.querySelector('[data-field="rate"]')?.value;
+  const branch = {
+    match: {
+      logic: branchEl.querySelector('[data-field="logic"]')?.value || "and",
+      conditions,
+    },
+    charge: {
+      type: branchEl.querySelector('[data-field="chargeType"]')?.value || "per",
+      rate: rateRaw === "" || rateRaw == null ? 0 : Number(rateRaw),
+    },
+  };
+  preview.textContent = summarizeBranch(branch);
+}
+
 function bindBuilder(host, inventory, recordRef) {
   const root = host.querySelector('[data-role="rule-builder"]');
   if (!root) return;
@@ -336,6 +496,24 @@ function bindBuilder(host, inventory, recordRef) {
     bindBuilder(host, inventory, recordRef);
   };
 
+  root.addEventListener("input", (e) => {
+    const t = e.target;
+    if (t.matches('[data-field="attrSearch"]')) {
+      const row = t.closest('[data-role="condition"]');
+      const sel = row?.querySelector('[data-field="attributeKey"]');
+      const component = root.querySelector('[data-field="component"]')?.value || "receiving";
+      const selectedAttr = sel?.selectedOptions?.[0]?.dataset?.attribute || "";
+      if (sel) {
+        sel.innerHTML = attrOptionsFor(inventory, component, selectedAttr, t.value);
+      }
+      return;
+    }
+    const branchEl = t.closest('[data-role="branch"]');
+    if (branchEl && (t.matches('[data-field="value"]') || t.matches('[data-field="rate"]') || t.matches('[data-field="label"]'))) {
+      refreshBranchPreview(branchEl);
+    }
+  });
+
   root.addEventListener("change", (e) => {
     const t = e.target;
     if (t.matches('[data-field="operator"]')) {
@@ -343,16 +521,21 @@ function bindBuilder(host, inventory, recordRef) {
       const val = row?.querySelector('[data-field="value"]');
       if (val) val.disabled = !opNeedsValue(t.value);
     }
-    if (t.matches('[data-field="attributeKey"]')) {
-      const row = t.closest('[data-role="condition"]');
-      const opt = t.selectedOptions?.[0];
-      const entityInput = row?.querySelector('[data-field="entity"]');
-      if (entityInput && opt?.dataset.entity && !entityInput.value) {
-        entityInput.value = opt.dataset.entity;
-      }
-    }
     if (t.matches('[data-field="component"]')) {
       rerender();
+      return;
+    }
+    const branchEl = t.closest('[data-role="branch"]');
+    if (
+      branchEl &&
+      (t.matches('[data-field="attributeKey"]') ||
+        t.matches('[data-field="operator"]') ||
+        t.matches('[data-field="logic"]') ||
+        t.matches('[data-field="chargeType"]') ||
+        t.matches('[data-field="rate"]') ||
+        t.matches('[data-field="value"]'))
+    ) {
+      refreshBranchPreview(branchEl);
     }
   });
 
@@ -375,10 +558,10 @@ function bindBuilder(host, inventory, recordRef) {
       const branch = current.branches.find((b) => b.id === id);
       if (branch) {
         branch.match.conditions.push({
-          entity: "",
           attribute: "",
           operator: "eq",
           value: "",
+          objects: [],
         });
       }
     } else if (action === "remove-condition") {
@@ -391,10 +574,10 @@ function bindBuilder(host, inventory, recordRef) {
         if (idx >= 0) branch.match.conditions.splice(idx, 1);
         if (!branch.match.conditions.length) {
           branch.match.conditions.push({
-            entity: "",
             attribute: "",
             operator: "eq",
             value: "",
+            objects: [],
           });
         }
       }
@@ -416,9 +599,6 @@ function setSimpleFieldsVisible(modalBody, visible) {
   }
 }
 
-/**
- * Mount conditional rule builder into an edit modal body for transaction/storage rules.
- */
 async function enhanceEditModal(modalBody, entityKey, record) {
   if (entityKey !== "rulesTransaction" && entityKey !== "rulesStorage") return;
 
@@ -504,4 +684,5 @@ window.BillingRuleBuilder = {
   applyToRecord,
   normalizeRuleRecord,
   summarizeBranch,
+  resolveFieldObjects,
 };
