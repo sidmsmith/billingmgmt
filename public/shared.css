@@ -990,17 +990,76 @@ table.ft-table th.col-selected-h {
 
 .rule-builder .rb-condition {
   display: grid;
-  grid-template-columns: minmax(12rem, 2fr) minmax(4.5rem, 0.7fr) minmax(5rem, 1fr) auto;
+  grid-template-columns: minmax(14rem, 2.2fr) minmax(4.5rem, 0.7fr) minmax(5rem, 1fr) auto;
   gap: 0.35rem;
   align-items: start;
   margin-bottom: 0.5rem;
 }
 
-.rule-builder .rb-attr-picker {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+.rule-builder .rb-combobox {
+  position: relative;
   min-width: 0;
+}
+
+.rule-builder .rb-combo-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.rule-builder .rb-combo-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rule-builder .rb-combo-panel {
+  position: absolute;
+  z-index: 1080;
+  top: calc(100% + 2px);
+  left: 0;
+  right: 0;
+  min-width: 18rem;
+  max-width: 28rem;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.35rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  padding: 0.4rem;
+}
+
+.rule-builder .rb-combo-search {
+  margin-bottom: 0.35rem;
+}
+
+.rule-builder .rb-combo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 16rem;
+  overflow-y: auto;
+}
+
+.rule-builder .rb-combo-option {
+  padding: 0.35rem 0.5rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rule-builder .rb-combo-option:hover,
+.rule-builder .rb-combo-option.is-selected {
+  background: rgba(59, 130, 246, 0.35);
+}
+
+.rule-builder .rb-combo-empty {
+  padding: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
 }
 
 .rule-builder .rb-preview {

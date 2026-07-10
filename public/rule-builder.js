@@ -16,6 +16,20 @@ const RULE_BUILDER_OPS = [
 
 const VALUELESS_OPS = new Set(["isEmpty", "isNotEmpty"]);
 
+/** Fallback object prefix when a field is not in FIELD_OBJECTS (by Rules component). */
+const COMPONENT_DEFAULT_OBJECT = {
+  receiving: "ASN",
+  dcinventory: "iLPN",
+  dcorder: "Order",
+  pickpack: "oLPN",
+  shipment: "Shipment",
+  putaway: "Putaway",
+  task: "Task",
+  dcallocation: "Allocation",
+  appointment: "Appointment",
+  "item-master": "Item",
+};
+
 /**
  * Field → MAWM objects where the field commonly appears.
  * Built from mawm_api_library search catalogs (ASN, PO, iLPN, oLPN, Order, Item, Location, Shipment, Appointment).
@@ -127,38 +141,37 @@ function escapeRb(text) {
     .replace(/"/g, "&quot;");
 }
 
-function resolveFieldObjects(attributeName) {
+function resolveFieldObjects(attributeName, component) {
   if (!attributeName) return [];
   const key = String(attributeName).toLowerCase();
   if (FIELD_OBJECTS[key]) return FIELD_OBJECTS[key].slice();
-  // Pattern families
   if (/^inventoryattribute[1-5]$/i.test(key)) return ["ASN", "PO", "iLPN"];
   if (/^itemattribute[1-5]$/i.test(key)) return ["Order", "oLPN"];
   if (/^trackitemattribute[1-5]$/i.test(key)) return ["Item"];
   if (/^allowmixinginventoryattr[1-5]$/i.test(key)) return ["Location"];
-  return [];
+  const fallback = COMPONENT_DEFAULT_OBJECT[(component || "").toLowerCase()];
+  return fallback ? [fallback] : ["Field"];
 }
 
+function primaryObject(a) {
+  const objects = a.objects?.length ? a.objects : resolveFieldObjects(a.attribute, a.component);
+  return objects[0] || COMPONENT_DEFAULT_OBJECT[(a.component || "").toLowerCase()] || "Field";
+}
+
+/** WMS-style label: Object.attributeName */
 function displayLabelForAttr(a) {
-  const objects = a.objects?.length ? a.objects : resolveFieldObjects(a.attribute);
-  const name = a.attribute || a.key;
-  if (objects.length) return `${name} — ${objects.join(", ")}`;
-  return String(name);
+  const name = a.attribute || a.key || "?";
+  return `${primaryObject(a)}.${name}`;
 }
 
 function enrichInventory(inventory) {
   const attrs = inventory?.billingIndex?.attributes || [];
   for (const a of attrs) {
-    const objects = resolveFieldObjects(a.attribute);
+    const objects = resolveFieldObjects(a.attribute, a.component);
     a.objects = objects;
-    if (!a.entity || a.entity === "unknown" || a.entity === "None") {
-      a.entity = objects[0] || "";
-    }
+    a.entity = objects[0] || "";
     a.label = displayLabelForAttr(a);
-    // Rebuild key for UI uniqueness but keep original key if present
-    if (!a.key || a.key.includes(".unknown.")) {
-      a.key = `${a.component}.${(a.entity || "field").toLowerCase()}.${a.attribute}`.toLowerCase();
-    }
+    a.key = `${a.component}.${a.entity}.${a.attribute}`.toLowerCase();
   }
   return inventory;
 }
@@ -206,20 +219,13 @@ function filterAttributes(inventory, { component, query }) {
   const q = (query || "").trim().toLowerCase();
   if (q) {
     attrs = attrs.filter((a) => {
-      const hay = `${a.attribute || ""} ${a.label || ""} ${(a.objects || []).join(" ")} ${a.key || ""}`.toLowerCase();
+      const hay = `${a.label || ""} ${a.attribute || ""} ${(a.objects || []).join(" ")} ${a.key || ""}`.toLowerCase();
       return hay.includes(q);
     });
   }
-  // Prefer enriched / known fields first when browsing without search
-  if (!q) {
-    attrs = [...attrs].sort((a, b) => {
-      const ae = a.objects?.length ? 0 : 1;
-      const be = b.objects?.length ? 0 : 1;
-      if (ae !== be) return ae - be;
-      return String(a.attribute || "").localeCompare(String(b.attribute || ""));
-    });
-  }
-  return attrs.slice(0, 300);
+  return [...attrs].sort((a, b) =>
+    String(a.label || "").localeCompare(String(b.label || ""), undefined, { sensitivity: "base" })
+  );
 }
 
 function opNeedsValue(op) {
@@ -227,7 +233,10 @@ function opNeedsValue(op) {
 }
 
 function summarizeCondition(c) {
-  const left = c.attribute || "?";
+  const objects = c.objects?.length ? c.objects : resolveFieldObjects(c.attribute, null);
+  const left = c.attribute
+    ? `${objects[0] || "Field"}.${c.attribute}`
+    : "…";
   const op = RULE_BUILDER_OPS.find((o) => o.id === c.operator)?.label || c.operator;
   if (!opNeedsValue(c.operator)) return `${left} ${op}`;
   const val = c.value == null || c.value === "" ? "…" : c.value;
@@ -277,24 +286,44 @@ function ensureConditionalShape(record) {
 
 function attrOptionsFor(inventory, component, selectedAttr, query) {
   const attrs = filterAttributes(inventory, { component, query: query || "" });
-  const opts = [`<option value="">— select attribute —</option>`];
+  const items = [];
   let matched = false;
   for (const a of attrs) {
     const sel = a.attribute === selectedAttr;
     if (sel) matched = true;
-    const objects = (a.objects || []).join(",");
-    opts.push(
-      `<option value="${escapeRb(a.key)}" data-attribute="${escapeRb(a.attribute || "")}" data-objects="${escapeRb(objects)}"${sel ? " selected" : ""}>${escapeRb(displayLabelForAttr(a))}</option>`
-    );
+    items.push({
+      key: a.key,
+      attribute: a.attribute,
+      objects: a.objects || [],
+      label: displayLabelForAttr(a),
+      selected: sel,
+    });
   }
   if (selectedAttr && !matched) {
-    const objects = resolveFieldObjects(selectedAttr);
-    const key = `custom.field.${selectedAttr}`;
-    opts.push(
-      `<option value="${escapeRb(key)}" data-attribute="${escapeRb(selectedAttr)}" data-objects="${escapeRb(objects.join(","))}" selected>${escapeRb(displayLabelForAttr({ attribute: selectedAttr, objects }))}</option>`
-    );
+    const objects = resolveFieldObjects(selectedAttr, component);
+    const fake = { attribute: selectedAttr, objects, component };
+    items.push({
+      key: `custom.field.${selectedAttr}`,
+      attribute: selectedAttr,
+      objects,
+      label: displayLabelForAttr(fake),
+      selected: true,
+    });
+    items.sort((a, b) => a.label.localeCompare(b.label, undefined, { sensitivity: "base" }));
   }
-  return opts.join("");
+  return items;
+}
+
+function renderComboListHtml(items) {
+  if (!items.length) {
+    return `<li class="rb-combo-empty">No matching attributes</li>`;
+  }
+  return items
+    .map((item) => {
+      const objects = (item.objects || []).join(",");
+      return `<li class="rb-combo-option${item.selected ? " is-selected" : ""}" role="option" data-key="${escapeRb(item.key)}" data-attribute="${escapeRb(item.attribute || "")}" data-objects="${escapeRb(objects)}" data-label="${escapeRb(item.label)}">${escapeRb(item.label)}</li>`;
+    })
+    .join("");
 }
 
 function renderConditionRow(cond, inventory, component) {
@@ -303,11 +332,27 @@ function renderConditionRow(cond, inventory, component) {
     (o) =>
       `<option value="${o.id}"${(cond.operator || "eq") === o.id ? " selected" : ""}>${escapeRb(o.label)}</option>`
   ).join("");
-  const attrHtml = attrOptionsFor(inventory, component, cond.attribute, "");
+  const items = attrOptionsFor(inventory, component, cond.attribute, "");
+  const selected = items.find((i) => i.selected);
+  const triggerLabel = selected
+    ? selected.label
+    : cond.attribute
+      ? displayLabelForAttr({
+          attribute: cond.attribute,
+          objects: cond.objects || resolveFieldObjects(cond.attribute, component),
+          component,
+        })
+      : "— select attribute —";
+  const objects = (selected?.objects || cond.objects || resolveFieldObjects(cond.attribute, component) || []).join(",");
   return `<div class="rb-condition" data-role="condition">
-    <div class="rb-attr-picker">
-      <input class="form-control form-control-sm" data-field="attrSearch" type="search" placeholder="Search attributes…" autocomplete="off" />
-      <select class="form-select form-select-sm" data-field="attributeKey">${attrHtml}</select>
+    <div class="rb-combobox" data-role="attr-combobox" data-attribute="${escapeRb(cond.attribute || "")}" data-objects="${escapeRb(objects)}" data-key="${escapeRb(selected?.key || "")}">
+      <button type="button" class="rb-combo-trigger form-select form-select-sm text-start" data-action="toggle-combo" aria-haspopup="listbox" aria-expanded="false">
+        <span class="rb-combo-label">${escapeRb(triggerLabel)}</span>
+      </button>
+      <div class="rb-combo-panel" hidden>
+        <input type="search" class="rb-combo-search form-control form-control-sm" placeholder="Search" data-field="attrSearch" autocomplete="off" />
+        <ul class="rb-combo-list" role="listbox">${renderComboListHtml(items)}</ul>
+      </div>
     </div>
     <select class="form-select form-select-sm" data-field="operator">${opOpts}</select>
     <input class="form-control form-control-sm" data-field="value" placeholder="value" value="${escapeRb(cond.value ?? "")}" ${needsVal ? "" : "disabled"} />
@@ -398,28 +443,18 @@ function renderBuilderHtml(record, inventory) {
 
 function readConditionEl(el) {
   const op = el.querySelector('[data-field="operator"]')?.value || "eq";
-  const attrSel = el.querySelector('[data-field="attributeKey"]');
-  const opt = attrSel?.selectedOptions?.[0];
-  let attribute = "";
-  let objects = [];
-  if (opt && opt.value) {
-    attribute = opt.dataset.attribute || "";
-    objects = (opt.dataset.objects || "")
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
-  }
-  if (!attribute && attrSel?.value) {
-    const parts = attrSel.value.split(".");
-    attribute = parts[parts.length - 1] || "";
-    objects = resolveFieldObjects(attribute);
-  }
-  if (!objects.length && attribute) objects = resolveFieldObjects(attribute);
+  const combo = el.querySelector('[data-role="attr-combobox"]');
+  const attribute = combo?.dataset.attribute || "";
+  const objects = (combo?.dataset.objects || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const resolved = objects.length ? objects : resolveFieldObjects(attribute, null);
   const value = opNeedsValue(op) ? el.querySelector('[data-field="value"]')?.value ?? "" : null;
   return {
     attribute,
-    objects,
-    entity: objects[0] || "",
+    objects: resolved,
+    entity: resolved[0] || "",
     operator: op,
     value,
   };
@@ -485,9 +520,40 @@ function refreshBranchPreview(branchEl) {
   preview.textContent = summarizeBranch(branch);
 }
 
+function closeAllComboboxes(except) {
+  document.querySelectorAll('[data-role="attr-combobox"].is-open').forEach((box) => {
+    if (except && box === except) return;
+    box.classList.remove("is-open");
+    const panel = box.querySelector(".rb-combo-panel");
+    const trigger = box.querySelector(".rb-combo-trigger");
+    if (panel) panel.hidden = true;
+    if (trigger) trigger.setAttribute("aria-expanded", "false");
+  });
+}
+
+function openCombobox(box, inventory, component) {
+  closeAllComboboxes(box);
+  const panel = box.querySelector(".rb-combo-panel");
+  const list = box.querySelector(".rb-combo-list");
+  const search = box.querySelector('[data-field="attrSearch"]');
+  const trigger = box.querySelector(".rb-combo-trigger");
+  if (!panel || !list) return;
+  const selectedAttr = box.dataset.attribute || "";
+  list.innerHTML = renderComboListHtml(attrOptionsFor(inventory, component, selectedAttr, ""));
+  panel.hidden = false;
+  box.classList.add("is-open");
+  if (trigger) trigger.setAttribute("aria-expanded", "true");
+  if (search) {
+    search.value = "";
+    setTimeout(() => search.focus(), 0);
+  }
+}
+
 function bindBuilder(host, inventory, recordRef) {
   const root = host.querySelector('[data-role="rule-builder"]');
   if (!root) return;
+
+  const getComponent = () => root.querySelector('[data-field="component"]')?.value || "receiving";
 
   const rerender = () => {
     const collected = collectFromHost(host) || ensureConditionalShape(recordRef);
@@ -499,12 +565,12 @@ function bindBuilder(host, inventory, recordRef) {
   root.addEventListener("input", (e) => {
     const t = e.target;
     if (t.matches('[data-field="attrSearch"]')) {
-      const row = t.closest('[data-role="condition"]');
-      const sel = row?.querySelector('[data-field="attributeKey"]');
-      const component = root.querySelector('[data-field="component"]')?.value || "receiving";
-      const selectedAttr = sel?.selectedOptions?.[0]?.dataset?.attribute || "";
-      if (sel) {
-        sel.innerHTML = attrOptionsFor(inventory, component, selectedAttr, t.value);
+      const box = t.closest('[data-role="attr-combobox"]');
+      const list = box?.querySelector(".rb-combo-list");
+      if (list) {
+        list.innerHTML = renderComboListHtml(
+          attrOptionsFor(inventory, getComponent(), box.dataset.attribute || "", t.value)
+        );
       }
       return;
     }
@@ -528,8 +594,7 @@ function bindBuilder(host, inventory, recordRef) {
     const branchEl = t.closest('[data-role="branch"]');
     if (
       branchEl &&
-      (t.matches('[data-field="attributeKey"]') ||
-        t.matches('[data-field="operator"]') ||
+      (t.matches('[data-field="operator"]') ||
         t.matches('[data-field="logic"]') ||
         t.matches('[data-field="chargeType"]') ||
         t.matches('[data-field="rate"]') ||
@@ -540,6 +605,34 @@ function bindBuilder(host, inventory, recordRef) {
   });
 
   root.addEventListener("click", (e) => {
+    const option = e.target.closest(".rb-combo-option");
+    if (option) {
+      e.preventDefault();
+      const box = option.closest('[data-role="attr-combobox"]');
+      const branchEl = option.closest('[data-role="branch"]');
+      if (box) {
+        box.dataset.attribute = option.dataset.attribute || "";
+        box.dataset.objects = option.dataset.objects || "";
+        box.dataset.key = option.dataset.key || "";
+        const labelEl = box.querySelector(".rb-combo-label");
+        if (labelEl) labelEl.textContent = option.dataset.label || option.textContent;
+        closeAllComboboxes();
+        if (branchEl) refreshBranchPreview(branchEl);
+      }
+      return;
+    }
+
+    const toggle = e.target.closest('[data-action="toggle-combo"]');
+    if (toggle) {
+      e.preventDefault();
+      e.stopPropagation();
+      const box = toggle.closest('[data-role="attr-combobox"]');
+      if (!box) return;
+      if (box.classList.contains("is-open")) closeAllComboboxes();
+      else openCombobox(box, inventory, getComponent());
+      return;
+    }
+
     const btn = e.target.closest("[data-action]");
     if (!btn) return;
     const action = btn.dataset.action;
@@ -589,6 +682,13 @@ function bindBuilder(host, inventory, recordRef) {
     host.innerHTML = renderBuilderHtml(recordRef, inventory);
     bindBuilder(host, inventory, recordRef);
   });
+
+  if (!host._rbDocCloseBound) {
+    host._rbDocCloseBound = true;
+    document.addEventListener("click", (ev) => {
+      if (!ev.target.closest('[data-role="attr-combobox"]')) closeAllComboboxes();
+    });
+  }
 }
 
 function setSimpleFieldsVisible(modalBody, visible) {
