@@ -3,15 +3,15 @@
   "facilities": [
     {
       "id": "SS-DEMO-DM1",
-      "name": "Demo Facility East",
+      "name": "SS-DEMO-DM1",
       "businessUnits": [
         {
-          "id": "BU-RETAIL",
-          "name": "Retail Operations",
+          "id": "DM1",
+          "name": "DM1",
           "clients": [
             {
-              "id": "ACME-3PL",
-              "name": "ACME 3PL",
+              "id": "ACME",
+              "name": "ACME",
               "clientActivities": [
                 {
                   "id": "act-recv-pallet",
@@ -200,22 +200,10 @@
                   "referenceFields": ["item", "location", "pallet", "lot"]
                 }
               ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "SS-DEMO-DM2",
-      "name": "Demo Facility West",
-      "businessUnits": [
-        {
-          "id": "BU-WHOLESALE",
-          "name": "Wholesale Operations",
-          "clients": [
+            },
             {
-              "id": "BETA-CORP",
-              "name": "Beta Corporation",
+              "id": "BETA",
+              "name": "BETA",
               "clientActivities": [
                 {
                   "id": "act-putaway",
@@ -256,7 +244,7 @@
               "billToCodes": [
                 {
                   "id": "BETA-INV",
-                  "name": "Beta Invoice Account",
+                  "name": "BETA Invoice Account",
                   "invoiceGroup": "WAREHOUSE",
                   "presentationOrder": 1,
                   "active": true
@@ -270,6 +258,70 @@
                   "referenceFields": ["pallet", "location", "item"]
                 }
               ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SS-DEMO-DM2",
+      "name": "SS-DEMO-DM2",
+      "businessUnits": [
+        {
+          "id": "DM2",
+          "name": "DM2",
+          "clients": [
+            {
+              "id": "ACME",
+              "name": "ACME",
+              "clientActivities": [],
+              "rateCards": [],
+              "rulesTransaction": [],
+              "rulesStorage": [],
+              "billToCodes": [],
+              "billingLogDefinitions": []
+            },
+            {
+              "id": "BETA",
+              "name": "BETA",
+              "clientActivities": [],
+              "rateCards": [],
+              "rulesTransaction": [],
+              "rulesStorage": [],
+              "billToCodes": [],
+              "billingLogDefinitions": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SS-DEMO-DM3",
+      "name": "SS-DEMO-DM3",
+      "businessUnits": [
+        {
+          "id": "DM3",
+          "name": "DM3",
+          "clients": [
+            {
+              "id": "ACME",
+              "name": "ACME",
+              "clientActivities": [],
+              "rateCards": [],
+              "rulesTransaction": [],
+              "rulesStorage": [],
+              "billToCodes": [],
+              "billingLogDefinitions": []
+            },
+            {
+              "id": "BETA",
+              "name": "BETA",
+              "clientActivities": [],
+              "rateCards": [],
+              "rulesTransaction": [],
+              "rulesStorage": [],
+              "billToCodes": [],
+              "billingLogDefinitions": []
             }
           ]
         }
