@@ -101,7 +101,11 @@
                   "minCharge": 0,
                   "maxCharge": null,
                   "conditions": [
-                    { "field": "orderType", "operator": "in", "value": "PO,ASN" }
+                    {
+                      "field": "orderType",
+                      "operator": "in",
+                      "value": "PO,ASN"
+                    }
                   ],
                   "active": true
                 },
@@ -117,12 +121,25 @@
                   "minCharge": 5.0,
                   "maxCharge": 500.0,
                   "tiers": [
-                    { "upTo": 10, "rate": 0.5 },
-                    { "upTo": 100, "rate": 0.35 },
-                    { "upTo": null, "rate": 0.25 }
+                    {
+                      "upTo": 10,
+                      "rate": 0.5
+                    },
+                    {
+                      "upTo": 100,
+                      "rate": 0.35
+                    },
+                    {
+                      "upTo": null,
+                      "rate": 0.25
+                    }
                   ],
                   "conditions": [
-                    { "field": "weightBand", "operator": "lte", "value": "50" }
+                    {
+                      "field": "weightBand",
+                      "operator": "lte",
+                      "value": "50"
+                    }
                   ],
                   "active": true
                 },
@@ -135,7 +152,9 @@
                   "chargeSumType": "activity",
                   "chargeType": "fixed",
                   "priority": 5,
-                  "recurring": { "frequency": "monthly" },
+                  "recurring": {
+                    "frequency": "monthly"
+                  },
                   "minCharge": null,
                   "maxCharge": null,
                   "active": true
@@ -185,19 +204,35 @@
                   "id": "bld-recv",
                   "billToCode": "ACME-MAIN",
                   "activityId": "act-recv-pallet",
-                  "referenceFields": ["asn", "pallet", "shipment", "item", "location"]
+                  "referenceFields": [
+                    "asn",
+                    "pallet",
+                    "shipment",
+                    "item",
+                    "location"
+                  ]
                 },
                 {
                   "id": "bld-pick",
                   "billToCode": "ACME-MAIN",
                   "activityId": "act-case-pick",
-                  "referenceFields": ["order", "orderType", "item", "location"]
+                  "referenceFields": [
+                    "order",
+                    "orderType",
+                    "item",
+                    "location"
+                  ]
                 },
                 {
                   "id": "bld-storage",
                   "billToCode": "ACME-MAIN",
                   "activityId": "act-storage",
-                  "referenceFields": ["item", "location", "pallet", "lot"]
+                  "referenceFields": [
+                    "item",
+                    "location",
+                    "pallet",
+                    "lot"
+                  ]
                 }
               ]
             },
@@ -255,9 +290,65 @@
                   "id": "bld-putaway",
                   "billToCode": "BETA-INV",
                   "activityId": "act-putaway",
-                  "referenceFields": ["pallet", "location", "item"]
+                  "referenceFields": [
+                    "pallet",
+                    "location",
+                    "item"
+                  ]
                 }
               ]
+            }
+          ]
+        },
+        {
+          "id": "DM2",
+          "name": "DM2",
+          "clients": [
+            {
+              "id": "ACME",
+              "name": "ACME",
+              "clientActivities": [],
+              "rateCards": [],
+              "rulesTransaction": [],
+              "rulesStorage": [],
+              "billToCodes": [],
+              "billingLogDefinitions": []
+            },
+            {
+              "id": "BETA",
+              "name": "BETA",
+              "clientActivities": [],
+              "rateCards": [],
+              "rulesTransaction": [],
+              "rulesStorage": [],
+              "billToCodes": [],
+              "billingLogDefinitions": []
+            }
+          ]
+        },
+        {
+          "id": "DM3",
+          "name": "DM3",
+          "clients": [
+            {
+              "id": "ACME",
+              "name": "ACME",
+              "clientActivities": [],
+              "rateCards": [],
+              "rulesTransaction": [],
+              "rulesStorage": [],
+              "billToCodes": [],
+              "billingLogDefinitions": []
+            },
+            {
+              "id": "BETA",
+              "name": "BETA",
+              "clientActivities": [],
+              "rateCards": [],
+              "rulesTransaction": [],
+              "rulesStorage": [],
+              "billToCodes": [],
+              "billingLogDefinitions": []
             }
           ]
         }
@@ -268,8 +359,60 @@
       "name": "SS-DEMO-DM2",
       "businessUnits": [
         {
+          "id": "DM1",
+          "name": "DM1",
+          "clients": [
+            {
+              "id": "ACME",
+              "name": "ACME",
+              "clientActivities": [],
+              "rateCards": [],
+              "rulesTransaction": [],
+              "rulesStorage": [],
+              "billToCodes": [],
+              "billingLogDefinitions": []
+            },
+            {
+              "id": "BETA",
+              "name": "BETA",
+              "clientActivities": [],
+              "rateCards": [],
+              "rulesTransaction": [],
+              "rulesStorage": [],
+              "billToCodes": [],
+              "billingLogDefinitions": []
+            }
+          ]
+        },
+        {
           "id": "DM2",
           "name": "DM2",
+          "clients": [
+            {
+              "id": "ACME",
+              "name": "ACME",
+              "clientActivities": [],
+              "rateCards": [],
+              "rulesTransaction": [],
+              "rulesStorage": [],
+              "billToCodes": [],
+              "billingLogDefinitions": []
+            },
+            {
+              "id": "BETA",
+              "name": "BETA",
+              "clientActivities": [],
+              "rateCards": [],
+              "rulesTransaction": [],
+              "rulesStorage": [],
+              "billToCodes": [],
+              "billingLogDefinitions": []
+            }
+          ]
+        },
+        {
+          "id": "DM3",
+          "name": "DM3",
           "clients": [
             {
               "id": "ACME",
@@ -299,6 +442,58 @@
       "id": "SS-DEMO-DM3",
       "name": "SS-DEMO-DM3",
       "businessUnits": [
+        {
+          "id": "DM1",
+          "name": "DM1",
+          "clients": [
+            {
+              "id": "ACME",
+              "name": "ACME",
+              "clientActivities": [],
+              "rateCards": [],
+              "rulesTransaction": [],
+              "rulesStorage": [],
+              "billToCodes": [],
+              "billingLogDefinitions": []
+            },
+            {
+              "id": "BETA",
+              "name": "BETA",
+              "clientActivities": [],
+              "rateCards": [],
+              "rulesTransaction": [],
+              "rulesStorage": [],
+              "billToCodes": [],
+              "billingLogDefinitions": []
+            }
+          ]
+        },
+        {
+          "id": "DM2",
+          "name": "DM2",
+          "clients": [
+            {
+              "id": "ACME",
+              "name": "ACME",
+              "clientActivities": [],
+              "rateCards": [],
+              "rulesTransaction": [],
+              "rulesStorage": [],
+              "billToCodes": [],
+              "billingLogDefinitions": []
+            },
+            {
+              "id": "BETA",
+              "name": "BETA",
+              "clientActivities": [],
+              "rateCards": [],
+              "rulesTransaction": [],
+              "rulesStorage": [],
+              "billToCodes": [],
+              "billingLogDefinitions": []
+            }
+          ]
+        },
         {
           "id": "DM3",
           "name": "DM3",

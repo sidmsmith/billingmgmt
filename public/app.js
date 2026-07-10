@@ -169,7 +169,7 @@ function renderTable() {
   });
 }
 
-async function loadDefaultConfig() {
+function openEditModal(recordId) {
   const scope = getScope();
   const records = BillingAdmin.getEntityRecords(state.orgDraft, scope, state.activeEntity);
   const existing = recordId ? records.find((r) => r.id === recordId) : null;
@@ -178,6 +178,10 @@ async function loadDefaultConfig() {
     ? `Edit ${BillingUI.ENTITY_LABELS[state.activeEntity]}`
     : `Add ${BillingUI.ENTITY_LABELS[state.activeEntity]}`;
   editModalBody.innerHTML = BillingUI.buildEditForm(state.activeEntity, existing || { active: true, billable: true });
+  if (!state.editModal) {
+    setStatus("Edit dialog failed to initialize", "danger");
+    return;
+  }
   state.editModal.show();
 }
 
