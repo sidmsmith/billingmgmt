@@ -1,0 +1,188 @@
+{
+  "object": "item",
+  "label": "Item",
+  "searchPath": "/item-master/api/item-master/item/search",
+  "idField": "ItemId",
+  "fields": [
+    {
+      "path": "CatchWeightItem",
+      "label": "Item.CatchWeightItem",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Description",
+      "label": "Item.Description",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Extended",
+      "label": "Item.Extended",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Extended.Owner",
+      "label": "Item.Extended.Owner",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Extended.VelocityCode",
+      "label": "Item.Extended.VelocityCode",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Hazmat",
+      "label": "Item.Hazmat",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Height",
+      "label": "Item.Height",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "ItemGroup",
+      "label": "Item.ItemGroup",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "ItemId",
+      "label": "Item.ItemId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "ItemPackage[].Quantity",
+      "label": "Item.ItemPackage.Quantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "ItemPackage[].Standard",
+      "label": "Item.ItemPackage.Standard",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "ItemPackage[].StandardQuantityUomId",
+      "label": "Item.ItemPackage.StandardQuantityUomId",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "ItemPackage[].UomId",
+      "label": "Item.ItemPackage.UomId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Length",
+      "label": "Item.Length",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "PrimaryBarCode",
+      "label": "Item.PrimaryBarCode",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "ProductClass",
+      "label": "Item.ProductClass",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "ProfileId",
+      "label": "Item.ProfileId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "ShortDescription",
+      "label": "Item.ShortDescription",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "TrackBatchNumber",
+      "label": "Item.TrackBatchNumber",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "TrackExpiryDate",
+      "label": "Item.TrackExpiryDate",
+      "type": "datetime",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "TrackItemAttribute1",
+      "label": "Item.TrackItemAttribute1",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "TrackItemAttribute2",
+      "label": "Item.TrackItemAttribute2",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "TrackItemAttribute3",
+      "label": "Item.TrackItemAttribute3",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "TrackItemAttribute4",
+      "label": "Item.TrackItemAttribute4",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "TrackItemAttribute5",
+      "label": "Item.TrackItemAttribute5",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "UnitCost",
+      "label": "Item.UnitCost",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "UnitPrice",
+      "label": "Item.UnitPrice",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Volume",
+      "label": "Item.Volume",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Weight",
+      "label": "Item.Weight",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Width",
+      "label": "Item.Width",
+      "type": "string",
+      "chargeColumnCandidate": false
+    }
+  ]
+}

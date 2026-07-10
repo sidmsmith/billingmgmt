@@ -1,0 +1,230 @@
+{
+  "object": "shipment",
+  "label": "Shipment",
+  "searchPath": "/shipment/api/shipment/shipment/search",
+  "idField": "ShipmentId",
+  "fields": [
+    {
+      "path": "AssignedCarrierId",
+      "label": "Shipment.AssignedCarrierId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "BillingMethodId",
+      "label": "Shipment.BillingMethodId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "BroadcastStatusId",
+      "label": "Shipment.BroadcastStatusId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "CurrencyCode",
+      "label": "Shipment.CurrencyCode",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "DesignatedCarrierId",
+      "label": "Shipment.DesignatedCarrierId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Extended",
+      "label": "Shipment.Extended",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "HazardousMaterial",
+      "label": "Shipment.HazardousMaterial",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "InvoicingStatusId",
+      "label": "Shipment.InvoicingStatusId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OrgId",
+      "label": "Shipment.OrgId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "PipelineId",
+      "label": "Shipment.PipelineId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "PipelineStatus",
+      "label": "Shipment.PipelineStatus",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "PlanningStatusId",
+      "label": "Shipment.PlanningStatusId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "PlanningTypeId",
+      "label": "Shipment.PlanningTypeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "ShipmentCost",
+      "label": "Shipment.ShipmentCost",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "ShipmentId",
+      "label": "Shipment.ShipmentId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "ShipmentPickupDelivery",
+      "label": "Shipment.ShipmentPickupDelivery",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "ShipmentVersion",
+      "label": "Shipment.ShipmentVersion",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Stop[]",
+      "label": "Shipment.Stop",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Stop[].BillOfLadingNumber",
+      "label": "Shipment.Stop.BillOfLadingNumber",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Stop[].DockDoorId",
+      "label": "Shipment.Stop.DockDoorId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Stop[].FacilityId",
+      "label": "Shipment.Stop.FacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Stop[].PlannedArrivalDateTime",
+      "label": "Shipment.Stop.PlannedArrivalDateTime",
+      "type": "datetime",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Stop[].StopActionId",
+      "label": "Shipment.Stop.StopActionId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Stop[].StopActionId.StopActionId",
+      "label": "Shipment.Stop.StopActionId.StopActionId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Stop[].StopId",
+      "label": "Shipment.Stop.StopId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Stop[].StopSequence",
+      "label": "Shipment.Stop.StopSequence",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Stop[].StopSizes",
+      "label": "Shipment.Stop.StopSizes",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Stop[].StopTransportationOrder",
+      "label": "Shipment.Stop.StopTransportationOrder",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Stop[].WarehouseStatusId",
+      "label": "Shipment.Stop.WarehouseStatusId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "TenderStatusId",
+      "label": "Shipment.TenderStatusId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "TotalAccessorialCost",
+      "label": "Shipment.TotalAccessorialCost",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "TotalFreightCost",
+      "label": "Shipment.TotalFreightCost",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "TotalShipmentCost",
+      "label": "Shipment.TotalShipmentCost",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "TotalVolume",
+      "label": "Shipment.TotalVolume",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "TotalWeight",
+      "label": "Shipment.TotalWeight",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "TrailerNumber",
+      "label": "Shipment.TrailerNumber",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "TransitStatusId",
+      "label": "Shipment.TransitStatusId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    }
+  ]
+}

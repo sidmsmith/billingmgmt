@@ -1,0 +1,226 @@
+{
+  "receiving": {
+    "label": "Receiving",
+    "primaryObject": "ilpn",
+    "objects": [
+      "ilpn",
+      "asn",
+      "purchase_order",
+      "item",
+      "appointment"
+    ],
+    "suggestedChargeColumns": [
+      {
+        "object": "asn",
+        "path": "AsnId"
+      },
+      {
+        "object": "ilpn",
+        "path": "IlpnId"
+      },
+      {
+        "object": "asn",
+        "path": "Lpn[].LpnId"
+      },
+      {
+        "object": "item",
+        "path": "ItemId"
+      },
+      {
+        "object": "asn",
+        "path": "Lpn[].LpnDetail[].ShippedQuantity"
+      }
+    ],
+    "joins": [
+      {
+        "from": "ilpn",
+        "to": "asn",
+        "on": [
+          "AsnId"
+        ]
+      },
+      {
+        "from": "ilpn",
+        "to": "purchase_order",
+        "on": [
+          "PurchaseOrderId"
+        ]
+      },
+      {
+        "from": "ilpn",
+        "to": "item",
+        "on": [
+          "ItemId"
+        ]
+      }
+    ]
+  },
+  "outbound": {
+    "label": "Outbound",
+    "primaryObject": "order",
+    "objects": [
+      "order",
+      "olpn",
+      "shipment",
+      "item"
+    ],
+    "suggestedChargeColumns": [
+      {
+        "object": "order",
+        "path": "OrderId"
+      },
+      {
+        "object": "olpn",
+        "path": "OlpnId"
+      },
+      {
+        "object": "order",
+        "path": "OrderLine[].OrderLineId"
+      },
+      {
+        "object": "order",
+        "path": "OrderLine[].OrderedQuantity"
+      },
+      {
+        "object": "olpn",
+        "path": "OlpnDetail[].PackedQuantity"
+      },
+      {
+        "object": "shipment",
+        "path": "ShipmentId"
+      },
+      {
+        "object": "shipment",
+        "path": "Stop[].BillOfLadingNumber"
+      }
+    ],
+    "joins": [
+      {
+        "from": "olpn",
+        "to": "order",
+        "on": [
+          "OrderId"
+        ]
+      },
+      {
+        "from": "olpn",
+        "to": "shipment",
+        "on": [
+          "ShipmentId"
+        ]
+      },
+      {
+        "from": "order",
+        "to": "item",
+        "on": [
+          "ItemId"
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "label": "Storage",
+    "primaryObject": "ilpn",
+    "objects": [
+      "ilpn",
+      "location",
+      "item"
+    ],
+    "suggestedChargeColumns": [
+      {
+        "object": "ilpn",
+        "path": "IlpnId"
+      },
+      {
+        "object": "location",
+        "path": "LocationId"
+      },
+      {
+        "object": "item",
+        "path": "ItemId"
+      }
+    ],
+    "joins": [
+      {
+        "from": "ilpn",
+        "to": "location",
+        "on": [
+          "CurrentLocationId",
+          "LocationId"
+        ]
+      },
+      {
+        "from": "ilpn",
+        "to": "item",
+        "on": [
+          "ItemId"
+        ]
+      }
+    ]
+  },
+  "shipping": {
+    "label": "Shipping",
+    "primaryObject": "shipment",
+    "objects": [
+      "shipment",
+      "olpn",
+      "order"
+    ],
+    "suggestedChargeColumns": [
+      {
+        "object": "shipment",
+        "path": "ShipmentId"
+      },
+      {
+        "object": "shipment",
+        "path": "Stop[].BillOfLadingNumber"
+      },
+      {
+        "object": "olpn",
+        "path": "OlpnId"
+      }
+    ],
+    "joins": [
+      {
+        "from": "olpn",
+        "to": "shipment",
+        "on": [
+          "ShipmentId"
+        ]
+      },
+      {
+        "from": "olpn",
+        "to": "order",
+        "on": [
+          "OrderId"
+        ]
+      }
+    ]
+  },
+  "services": {
+    "label": "Services",
+    "primaryObject": "order",
+    "objects": [
+      "order",
+      "olpn",
+      "item",
+      "ilpn",
+      "asn"
+    ],
+    "suggestedChargeColumns": [
+      {
+        "object": "order",
+        "path": "OrderId"
+      },
+      {
+        "object": "item",
+        "path": "ItemId"
+      },
+      {
+        "object": "olpn",
+        "path": "OlpnId"
+      }
+    ],
+    "joins": []
+  }
+}

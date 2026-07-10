@@ -1,0 +1,272 @@
+{
+  "object": "olpn",
+  "label": "oLPN",
+  "searchPath": "/pickpack/api/pickpack/olpn/search",
+  "idField": "OlpnId",
+  "fields": [
+    {
+      "path": "BillingMethod",
+      "label": "oLPN.BillingMethod",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "BillToName",
+      "label": "oLPN.BillToName",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "CarrierId",
+      "label": "oLPN.CarrierId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "ContainerSizeId",
+      "label": "oLPN.ContainerSizeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "ContainerTypeId",
+      "label": "oLPN.ContainerTypeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "CurrentLocationId",
+      "label": "oLPN.CurrentLocationId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "EstimatedWeight",
+      "label": "oLPN.EstimatedWeight",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Extended",
+      "label": "oLPN.Extended",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Extended.PODDate",
+      "label": "oLPN.Extended.PODDate",
+      "type": "datetime",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Extended.PONum",
+      "label": "oLPN.Extended.PONum",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "FacilityId",
+      "label": "oLPN.FacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "HotOrder",
+      "label": "oLPN.HotOrder",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "IsSingleLine",
+      "label": "oLPN.IsSingleLine",
+      "type": "boolean",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "LpnType",
+      "label": "oLPN.LpnType",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OlpnAccessorial",
+      "label": "oLPN.OlpnAccessorial",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OlpnDetail[]",
+      "label": "oLPN.OlpnDetail",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OlpnDetail[].BatchNumber",
+      "label": "oLPN.OlpnDetail.BatchNumber",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OlpnDetail[].InitialQuantity",
+      "label": "oLPN.OlpnDetail.InitialQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OlpnDetail[].ItemAttribute1",
+      "label": "oLPN.OlpnDetail.ItemAttribute1",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OlpnDetail[].ItemAttribute2",
+      "label": "oLPN.OlpnDetail.ItemAttribute2",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OlpnDetail[].ItemAttribute3",
+      "label": "oLPN.OlpnDetail.ItemAttribute3",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OlpnDetail[].ItemAttribute4",
+      "label": "oLPN.OlpnDetail.ItemAttribute4",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OlpnDetail[].ItemAttribute5",
+      "label": "oLPN.OlpnDetail.ItemAttribute5",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OlpnDetail[].ItemId",
+      "label": "oLPN.OlpnDetail.ItemId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OlpnDetail[].OlpnDetailId",
+      "label": "oLPN.OlpnDetail.OlpnDetailId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OlpnDetail[].OrderId",
+      "label": "oLPN.OlpnDetail.OrderId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OlpnDetail[].OrderLineId",
+      "label": "oLPN.OlpnDetail.OrderLineId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OlpnDetail[].PackedQuantity",
+      "label": "oLPN.OlpnDetail.PackedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OlpnDetail[].PickedQuantity",
+      "label": "oLPN.OlpnDetail.PickedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OlpnDetail[].ProductClassId",
+      "label": "oLPN.OlpnDetail.ProductClassId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OlpnId",
+      "label": "oLPN.OlpnId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OrderId",
+      "label": "oLPN.OrderId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OrderPriority",
+      "label": "oLPN.OrderPriority",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OrderType",
+      "label": "oLPN.OrderType",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OrgId",
+      "label": "oLPN.OrgId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OriginFacilityId",
+      "label": "oLPN.OriginFacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "PickLocationId",
+      "label": "oLPN.PickLocationId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "ServiceLevelId",
+      "label": "oLPN.ServiceLevelId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "ShipmentId",
+      "label": "oLPN.ShipmentId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "ShipViaId",
+      "label": "oLPN.ShipViaId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "SingleLineOrder",
+      "label": "oLPN.SingleLineOrder",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Status",
+      "label": "oLPN.Status",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Volume",
+      "label": "oLPN.Volume",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Weight",
+      "label": "oLPN.Weight",
+      "type": "number",
+      "chargeColumnCandidate": false
+    }
+  ]
+}

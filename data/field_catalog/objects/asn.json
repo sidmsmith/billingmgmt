@@ -1,0 +1,272 @@
+{
+  "object": "asn",
+  "label": "ASN",
+  "searchPath": "/receiving/api/receiving/asn/search",
+  "idField": "AsnId",
+  "fields": [
+    {
+      "path": "AsnId",
+      "label": "ASN.AsnId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "AsnLevelId",
+      "label": "ASN.AsnLevelId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "AsnLine",
+      "label": "ASN.AsnLine",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "AsnLine[].InventoryAttribute1",
+      "label": "ASN.AsnLine.InventoryAttribute1",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "AsnLine[].ItemId",
+      "label": "ASN.AsnLine.ItemId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "AsnLine[].ShippedQuantity",
+      "label": "ASN.AsnLine.ShippedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "AsnOriginTypeId",
+      "label": "ASN.AsnOriginTypeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "AsnStatus",
+      "label": "ASN.AsnStatus",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "BillOfLadingNumber",
+      "label": "ASN.BillOfLadingNumber",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "BusinessUnitId",
+      "label": "ASN.BusinessUnitId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Canceled",
+      "label": "ASN.Canceled",
+      "type": "boolean",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "CarrierId",
+      "label": "ASN.CarrierId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "DestinationFacilityId",
+      "label": "ASN.DestinationFacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Extended",
+      "label": "ASN.Extended",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Extended.ASNPriority",
+      "label": "ASN.Extended.ASNPriority",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Extended.IsAppointmentPresent",
+      "label": "ASN.Extended.IsAppointmentPresent",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "FacilityId",
+      "label": "ASN.FacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "InventoryAttribute1",
+      "label": "ASN.InventoryAttribute1",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "InventoryAttribute2",
+      "label": "ASN.InventoryAttribute2",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "InventoryAttribute3",
+      "label": "ASN.InventoryAttribute3",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "InventoryAttribute4",
+      "label": "ASN.InventoryAttribute4",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "InventoryAttribute5",
+      "label": "ASN.InventoryAttribute5",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Lpn[]",
+      "label": "ASN.Lpn",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Lpn[].LpnDetail[]",
+      "label": "ASN.Lpn.LpnDetail",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Lpn[].LpnDetail[].BatchNumber",
+      "label": "ASN.Lpn.LpnDetail.BatchNumber",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Lpn[].LpnDetail[].CountryOfOrigin",
+      "label": "ASN.Lpn.LpnDetail.CountryOfOrigin",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Lpn[].LpnDetail[].InventoryAttribute1",
+      "label": "ASN.Lpn.LpnDetail.InventoryAttribute1",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Lpn[].LpnDetail[].InventoryAttribute2",
+      "label": "ASN.Lpn.LpnDetail.InventoryAttribute2",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Lpn[].LpnDetail[].InventoryAttribute3",
+      "label": "ASN.Lpn.LpnDetail.InventoryAttribute3",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Lpn[].LpnDetail[].InventoryAttribute4",
+      "label": "ASN.Lpn.LpnDetail.InventoryAttribute4",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Lpn[].LpnDetail[].InventoryAttribute5",
+      "label": "ASN.Lpn.LpnDetail.InventoryAttribute5",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Lpn[].LpnDetail[].ItemId",
+      "label": "ASN.Lpn.LpnDetail.ItemId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Lpn[].LpnDetail[].QuantityUomId",
+      "label": "ASN.Lpn.LpnDetail.QuantityUomId",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Lpn[].LpnDetail[].ShippedQuantity",
+      "label": "ASN.Lpn.LpnDetail.ShippedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Lpn[].LpnId",
+      "label": "ASN.Lpn.LpnId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Lpn[].LpnStatus",
+      "label": "ASN.Lpn.LpnStatus",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Lpn[].LpnTypeId",
+      "label": "ASN.Lpn.LpnTypeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Lpn[].ParentLpnId",
+      "label": "ASN.Lpn.ParentLpnId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OrgId",
+      "label": "ASN.OrgId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "ReceivedLpns",
+      "label": "ASN.ReceivedLpns",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "ReceivingCompleted",
+      "label": "ASN.ReceivingCompleted",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "ShippedLpns",
+      "label": "ASN.ShippedLpns",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "TrailerId",
+      "label": "ASN.TrailerId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "VendorId",
+      "label": "ASN.VendorId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    }
+  ]
+}

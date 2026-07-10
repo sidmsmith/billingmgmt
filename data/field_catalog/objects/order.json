@@ -1,0 +1,236 @@
+{
+  "object": "order",
+  "label": "Order",
+  "searchPath": "/dcorder/api/dcorder/order/search",
+  "idField": "OrderId",
+  "fields": [
+    {
+      "path": "BillingMethodId",
+      "label": "Order.BillingMethodId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "BillToName",
+      "label": "Order.BillToName",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "BusinessUnitId",
+      "label": "Order.BusinessUnitId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Cancelled",
+      "label": "Order.Cancelled",
+      "type": "boolean",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "DestinationFacilityId",
+      "label": "Order.DestinationFacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Extended",
+      "label": "Order.Extended",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Extended.TransferType",
+      "label": "Order.Extended.TransferType",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "FacilityId",
+      "label": "Order.FacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "MaximumStatus",
+      "label": "Order.MaximumStatus",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "MinimumStatus",
+      "label": "Order.MinimumStatus",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OrderAttributes",
+      "label": "Order.OrderAttributes",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OrderId",
+      "label": "Order.OrderId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OrderLine[]",
+      "label": "Order.OrderLine",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OrderLine[].AllocatedQuantity",
+      "label": "Order.OrderLine.AllocatedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OrderLine[].AssignedShipmentId",
+      "label": "Order.OrderLine.AssignedShipmentId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OrderLine[].HotOrder",
+      "label": "Order.OrderLine.HotOrder",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OrderLine[].ItemAttribute1",
+      "label": "Order.OrderLine.ItemAttribute1",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OrderLine[].ItemAttribute2",
+      "label": "Order.OrderLine.ItemAttribute2",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OrderLine[].ItemAttribute3",
+      "label": "Order.OrderLine.ItemAttribute3",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OrderLine[].ItemAttribute4",
+      "label": "Order.OrderLine.ItemAttribute4",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OrderLine[].ItemAttribute5",
+      "label": "Order.OrderLine.ItemAttribute5",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OrderLine[].ItemId",
+      "label": "Order.OrderLine.ItemId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OrderLine[].OrderedQuantity",
+      "label": "Order.OrderLine.OrderedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OrderLine[].OrderId",
+      "label": "Order.OrderLine.OrderId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OrderLine[].OrderLineId",
+      "label": "Order.OrderLine.OrderLineId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OrderLine[].PackedQuantity",
+      "label": "Order.OrderLine.PackedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OrderLine[].PipelineStatus",
+      "label": "Order.OrderLine.PipelineStatus",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OrderLine[].ShippedQuantity",
+      "label": "Order.OrderLine.ShippedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OrderLine[].Status",
+      "label": "Order.OrderLine.Status",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OrderLine[].UnitPrice",
+      "label": "Order.OrderLine.UnitPrice",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OrderType",
+      "label": "Order.OrderType",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "OrgId",
+      "label": "Order.OrgId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OriginFacilityId",
+      "label": "Order.OriginFacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "PipelineId",
+      "label": "Order.PipelineId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Priority",
+      "label": "Order.Priority",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "ResidentialDestination",
+      "label": "Order.ResidentialDestination",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "SingleLineOrder",
+      "label": "Order.SingleLineOrder",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "SingleUnitOrder",
+      "label": "Order.SingleUnitOrder",
+      "type": "string",
+      "chargeColumnCandidate": false
+    }
+  ]
+}

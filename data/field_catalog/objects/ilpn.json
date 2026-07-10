@@ -1,0 +1,170 @@
+{
+  "object": "ilpn",
+  "label": "iLPN",
+  "searchPath": "/dcinventory/api/dcinventory/ilpn/search",
+  "idField": "IlpnId",
+  "fields": [
+    {
+      "path": "ActualWeight",
+      "label": "iLPN.ActualWeight",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "AsnId",
+      "label": "iLPN.AsnId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "BusinessUnitId",
+      "label": "iLPN.BusinessUnitId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "CurrentLocationId",
+      "label": "iLPN.CurrentLocationId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "CurrentLocationTypeId",
+      "label": "iLPN.CurrentLocationTypeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "EstimatedWeight",
+      "label": "iLPN.EstimatedWeight",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Extended",
+      "label": "iLPN.Extended",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Extended.CPD",
+      "label": "iLPN.Extended.CPD",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "FacilityId",
+      "label": "iLPN.FacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "FinalDestinationFacilityId",
+      "label": "iLPN.FinalDestinationFacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "HasProxyHold",
+      "label": "iLPN.HasProxyHold",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "IlpnId",
+      "label": "iLPN.IlpnId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "IlpnTypeId",
+      "label": "iLPN.IlpnTypeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "IsClosed",
+      "label": "iLPN.IsClosed",
+      "type": "boolean",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "ItemId",
+      "label": "iLPN.ItemId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OrgId",
+      "label": "iLPN.OrgId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "ParentLpnId",
+      "label": "iLPN.ParentLpnId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "PhysicalEntityCodeId",
+      "label": "iLPN.PhysicalEntityCodeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "PurchaseOrderId",
+      "label": "iLPN.PurchaseOrderId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "PutawayAllocated",
+      "label": "iLPN.PutawayAllocated",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "PutawayCompleted",
+      "label": "iLPN.PutawayCompleted",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "ShipmentId",
+      "label": "iLPN.ShipmentId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "SingleItemLpn",
+      "label": "iLPN.SingleItemLpn",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "SingleLineLpn",
+      "label": "iLPN.SingleLineLpn",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Status",
+      "label": "iLPN.Status",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "VendorId",
+      "label": "iLPN.VendorId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Volume",
+      "label": "iLPN.Volume",
+      "type": "number",
+      "chargeColumnCandidate": false
+    }
+  ]
+}

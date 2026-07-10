@@ -95,11 +95,13 @@
                   "activityId": "act-recv-pallet",
                   "rateCardId": "rc-recv-pallet",
                   "ruleType": "transaction",
-                  "chargeSumType": "transaction",
+                  "chargeSumType": "transactionByChargeColumn",
                   "chargeType": "per",
+                  "chargeColumn": { "object": "asn", "path": "AsnId" },
                   "priority": 10,
                   "minCharge": 0,
                   "maxCharge": null,
+                  "attributeSource": { "domain": "receiving" },
                   "conditions": [
                     {
                       "field": "orderType",
@@ -117,12 +119,12 @@
                   "ruleType": "transaction",
                   "chargeSumType": "line",
                   "chargeType": "conditionalPer",
+                  "chargeColumn": { "object": "ilpn", "path": "IlpnId" },
                   "uom": "Case",
                   "priority": 15,
                   "active": true,
                   "attributeSource": {
-                    "component": "receiving",
-                    "ruleTypeId": null
+                    "domain": "receiving"
                   },
                   "branches": [
                     {
@@ -132,9 +134,9 @@
                         "logic": "and",
                         "conditions": [
                           {
-                            "attribute": "InventoryAttribute1",
-                            "objects": ["ASN", "PO", "iLPN"],
-                            "entity": "ASN",
+                            "object": "asn",
+                            "path": "Lpn[].LpnDetail[].InventoryAttribute1",
+                            "label": "ASN.Lpn.LpnDetail.InventoryAttribute1",
                             "operator": "eq",
                             "value": "HAZMAT"
                           }
@@ -149,9 +151,9 @@
                         "logic": "and",
                         "conditions": [
                           {
-                            "attribute": "InventoryAttribute1",
-                            "objects": ["ASN", "PO", "iLPN"],
-                            "entity": "ASN",
+                            "object": "asn",
+                            "path": "Lpn[].LpnDetail[].InventoryAttribute1",
+                            "label": "ASN.Lpn.LpnDetail.InventoryAttribute1",
                             "operator": "eq",
                             "value": "STANDARD"
                           }
@@ -170,6 +172,8 @@
                   "ruleType": "transaction",
                   "chargeSumType": "line",
                   "chargeType": "tier",
+                  "chargeColumn": { "object": "order", "path": "OrderLine[].OrderedQuantity" },
+                  "attributeSource": { "domain": "outbound" },
                   "priority": 20,
                   "minCharge": 5.0,
                   "maxCharge": 500.0,

@@ -1,0 +1,134 @@
+{
+  "object": "location",
+  "label": "Location",
+  "searchPath": "/dcinventory/api/dcinventory/location/search",
+  "idField": "LocationId",
+  "fields": [
+    {
+      "path": "Aisle",
+      "label": "Location.Aisle",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "AllowMixingInventoryAttr1",
+      "label": "Location.AllowMixingInventoryAttr1",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "AllowMixingInventoryAttr2",
+      "label": "Location.AllowMixingInventoryAttr2",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "AllowMixingInventoryAttr3",
+      "label": "Location.AllowMixingInventoryAttr3",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "AllowMixingInventoryAttr4",
+      "label": "Location.AllowMixingInventoryAttr4",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "AllowMixingInventoryAttr5",
+      "label": "Location.AllowMixingInventoryAttr5",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Area",
+      "label": "Location.Area",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "DisplayLocation",
+      "label": "Location.DisplayLocation",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "DockDoorTypeId",
+      "label": "Location.DockDoorTypeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "DockDoorZoneId",
+      "label": "Location.DockDoorZoneId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "DockId",
+      "label": "Location.DockId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "IsActive",
+      "label": "Location.IsActive",
+      "type": "boolean",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "LocationBarcode",
+      "label": "Location.LocationBarcode",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "LocationId",
+      "label": "Location.LocationId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "LocationTypeId",
+      "label": "Location.LocationTypeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "LocationUom",
+      "label": "Location.LocationUom",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "MaxVolume",
+      "label": "Location.MaxVolume",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "MaxWeight",
+      "label": "Location.MaxWeight",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "ProfileId",
+      "label": "Location.ProfileId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "TrackCapacity",
+      "label": "Location.TrackCapacity",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Zone",
+      "label": "Location.Zone",
+      "type": "string",
+      "chargeColumnCandidate": false
+    }
+  ]
+}

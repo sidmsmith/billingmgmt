@@ -1,0 +1,176 @@
+{
+  "object": "appointment",
+  "label": "Appointment",
+  "searchPath": "/appointment/api/appointment/appointment/search",
+  "idField": "AppointmentId",
+  "fields": [
+    {
+      "path": "AppointmentContents",
+      "label": "Appointment.AppointmentContents",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "AppointmentId",
+      "label": "Appointment.AppointmentId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "AppointmentSchedules[].AppointmentScheduleId",
+      "label": "Appointment.AppointmentSchedules.AppointmentScheduleId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "AppointmentSchedules[].FacilityId",
+      "label": "Appointment.AppointmentSchedules.FacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "AppointmentSchedules[].OrgId",
+      "label": "Appointment.AppointmentSchedules.OrgId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "AppointmentSchedules[].Schedule",
+      "label": "Appointment.AppointmentSchedules.Schedule",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "AppointmentSchedules[].Schedule.ScheduleId",
+      "label": "Appointment.AppointmentSchedules.Schedule.ScheduleId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "AppointmentStatusId",
+      "label": "Appointment.AppointmentStatusId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "AppointmentTypeId",
+      "label": "Appointment.AppointmentTypeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "ArrivalDateTime",
+      "label": "Appointment.ArrivalDateTime",
+      "type": "datetime",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Asn",
+      "label": "Appointment.Asn",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "AssignedDockId",
+      "label": "Appointment.AssignedDockId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "AssignedDoorId",
+      "label": "Appointment.AssignedDoorId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "CarrierId",
+      "label": "Appointment.CarrierId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "ContentType",
+      "label": "Appointment.ContentType",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "ContentTypeDescription",
+      "label": "Appointment.ContentTypeDescription",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Duration",
+      "label": "Appointment.Duration",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Extended",
+      "label": "Appointment.Extended",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Extended.Priority",
+      "label": "Appointment.Extended.Priority",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "FacilityId",
+      "label": "Appointment.FacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OrgId",
+      "label": "Appointment.OrgId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "PreferredDateTime",
+      "label": "Appointment.PreferredDateTime",
+      "type": "datetime",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Resources[].GroupName",
+      "label": "Appointment.Resources.GroupName",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Resources[].ResourceName",
+      "label": "Appointment.Resources.ResourceName",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "TemplateId",
+      "label": "Appointment.TemplateId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "TemplateId.TemplateId",
+      "label": "Appointment.TemplateId.TemplateId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "TrailerId",
+      "label": "Appointment.TrailerId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "VendorId",
+      "label": "Appointment.VendorId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    }
+  ]
+}

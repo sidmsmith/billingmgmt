@@ -47,25 +47,36 @@ billingmgmt/
 
 ## Rule attribute inventory (crawler)
 
-Discovers MAWM Rules Framework components → rule types → entities/attributes for the future rule builder.
+The Rules Framework crawler (`scripts/crawl_rule_attributes.py`) discovers MAWM **rule-type** attributes. It is **not** the primary source for the billing rule builder dropdowns.
 
-Auth uses a refreshable **`.token`** file (same pattern as flowthrough `create_asns.py`). Paste a fresh access token into `billingmgmt/.token` (gitignored) when it expires.
+**Billing rule fields** come from the object field catalog (ASN, PO, iLPN, Order, …) under `data/field_catalog/`, snapshotted from `../mawm_api_library`. Regenerate with:
 
 ```bash
-# Offline sample (already under data/rule_inventory/)
-python scripts/crawl_rule_attributes.py --seed-sample
-
-# Live crawl — reads ./.token by default
-python scripts/crawl_rule_attributes.py --org SS-DEMO
-python scripts/crawl_rule_attributes.py --org SS-DEMO --verify
-python scripts/crawl_rule_attributes.py --org SS-DEMO --all-components
+python ../mawm_api_library/_scripts/generate_field_catalogs.py
 ```
 
-Auth priority: `--token-file` → `--token` → `./.token` → OAuth env vars (optional fallback).
+### Rule builder concepts (legacy BM aligned)
 
-Outputs: `data/rule_inventory/rule_inventory.json`, `rule_inventory.csv`, `crawl_errors.json`.
+- **Charge Type** — per / fixed / tier / conditionalPer / …
+- **Charge Column** — what to count or group (`ASN.AsnId`, `iLPN.IlpnId`, …)
+- **Charge Sum Type** — line / transaction / transactionByChargeColumn / …
+- **Conditions / branches** — optional filters on the same catalog fields
 
-Cross-reference real object fields/statuses in the sibling library: `../mawm_api_library/`.
+### Future engine sketch
+
+1. Pull WM **activity transaction log** for a date range  
+2. Enrich each txn via search APIs + domain joins  
+3. Evaluate client rules (charge column + conditions + rate)  
+4. Write billing charge records  
+
+Auth for live crawls still uses refreshable **`.token`** (same as flowthrough).
+
+```bash
+python scripts/crawl_rule_attributes.py --seed-sample
+python scripts/crawl_rule_attributes.py --org SS-DEMO --verify
+```
+
+Cross-reference APIs/statuses: `../mawm_api_library/`.
 
 ## URL parameters
 

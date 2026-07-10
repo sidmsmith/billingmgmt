@@ -1,0 +1,2996 @@
+{
+  "version": 1,
+  "objects": {
+    "asn": {
+      "label": "ASN",
+      "searchPath": "/receiving/api/receiving/asn/search",
+      "idField": "AsnId",
+      "fieldCount": 44,
+      "file": "asn/fields.json"
+    },
+    "purchase_order": {
+      "label": "PO",
+      "searchPath": "/receiving/api/receiving/purchaseOrder/search",
+      "idField": "PurchaseOrderId",
+      "fieldCount": 31,
+      "file": "purchase_order/fields.json"
+    },
+    "ilpn": {
+      "label": "iLPN",
+      "searchPath": "/dcinventory/api/dcinventory/ilpn/search",
+      "idField": "IlpnId",
+      "fieldCount": 27,
+      "file": "ilpn/fields.json"
+    },
+    "olpn": {
+      "label": "oLPN",
+      "searchPath": "/pickpack/api/pickpack/olpn/search",
+      "idField": "OlpnId",
+      "fieldCount": 44,
+      "file": "olpn/fields.json"
+    },
+    "order": {
+      "label": "Order",
+      "searchPath": "/dcorder/api/dcorder/order/search",
+      "idField": "OrderId",
+      "fieldCount": 38,
+      "file": "order/fields.json"
+    },
+    "item": {
+      "label": "Item",
+      "searchPath": "/item-master/api/item-master/item/search",
+      "idField": "ItemId",
+      "fieldCount": 30,
+      "file": "item/fields.json"
+    },
+    "location": {
+      "label": "Location",
+      "searchPath": "/dcinventory/api/dcinventory/location/search",
+      "idField": "LocationId",
+      "fieldCount": 21,
+      "file": "location/fields.json"
+    },
+    "shipment": {
+      "label": "Shipment",
+      "searchPath": "/shipment/api/shipment/shipment/search",
+      "idField": "ShipmentId",
+      "fieldCount": 37,
+      "file": "shipment/fields.json"
+    },
+    "appointment": {
+      "label": "Appointment",
+      "searchPath": "/appointment/api/appointment/appointment/search",
+      "idField": "AppointmentId",
+      "fieldCount": 28,
+      "file": "appointment/fields.json"
+    }
+  },
+  "domains": {
+    "receiving": {
+      "label": "Receiving",
+      "primaryObject": "ilpn",
+      "objects": [
+        "ilpn",
+        "asn",
+        "purchase_order",
+        "item",
+        "appointment"
+      ],
+      "suggestedChargeColumns": [
+        {
+          "object": "asn",
+          "path": "AsnId"
+        },
+        {
+          "object": "ilpn",
+          "path": "IlpnId"
+        },
+        {
+          "object": "asn",
+          "path": "Lpn[].LpnId"
+        },
+        {
+          "object": "item",
+          "path": "ItemId"
+        },
+        {
+          "object": "asn",
+          "path": "Lpn[].LpnDetail[].ShippedQuantity"
+        }
+      ],
+      "joins": [
+        {
+          "from": "ilpn",
+          "to": "asn",
+          "on": [
+            "AsnId"
+          ]
+        },
+        {
+          "from": "ilpn",
+          "to": "purchase_order",
+          "on": [
+            "PurchaseOrderId"
+          ]
+        },
+        {
+          "from": "ilpn",
+          "to": "item",
+          "on": [
+            "ItemId"
+          ]
+        }
+      ]
+    },
+    "outbound": {
+      "label": "Outbound",
+      "primaryObject": "order",
+      "objects": [
+        "order",
+        "olpn",
+        "shipment",
+        "item"
+      ],
+      "suggestedChargeColumns": [
+        {
+          "object": "order",
+          "path": "OrderId"
+        },
+        {
+          "object": "olpn",
+          "path": "OlpnId"
+        },
+        {
+          "object": "order",
+          "path": "OrderLine[].OrderLineId"
+        },
+        {
+          "object": "order",
+          "path": "OrderLine[].OrderedQuantity"
+        },
+        {
+          "object": "olpn",
+          "path": "OlpnDetail[].PackedQuantity"
+        },
+        {
+          "object": "shipment",
+          "path": "ShipmentId"
+        },
+        {
+          "object": "shipment",
+          "path": "Stop[].BillOfLadingNumber"
+        }
+      ],
+      "joins": [
+        {
+          "from": "olpn",
+          "to": "order",
+          "on": [
+            "OrderId"
+          ]
+        },
+        {
+          "from": "olpn",
+          "to": "shipment",
+          "on": [
+            "ShipmentId"
+          ]
+        },
+        {
+          "from": "order",
+          "to": "item",
+          "on": [
+            "ItemId"
+          ]
+        }
+      ]
+    },
+    "storage": {
+      "label": "Storage",
+      "primaryObject": "ilpn",
+      "objects": [
+        "ilpn",
+        "location",
+        "item"
+      ],
+      "suggestedChargeColumns": [
+        {
+          "object": "ilpn",
+          "path": "IlpnId"
+        },
+        {
+          "object": "location",
+          "path": "LocationId"
+        },
+        {
+          "object": "item",
+          "path": "ItemId"
+        }
+      ],
+      "joins": [
+        {
+          "from": "ilpn",
+          "to": "location",
+          "on": [
+            "CurrentLocationId",
+            "LocationId"
+          ]
+        },
+        {
+          "from": "ilpn",
+          "to": "item",
+          "on": [
+            "ItemId"
+          ]
+        }
+      ]
+    },
+    "shipping": {
+      "label": "Shipping",
+      "primaryObject": "shipment",
+      "objects": [
+        "shipment",
+        "olpn",
+        "order"
+      ],
+      "suggestedChargeColumns": [
+        {
+          "object": "shipment",
+          "path": "ShipmentId"
+        },
+        {
+          "object": "shipment",
+          "path": "Stop[].BillOfLadingNumber"
+        },
+        {
+          "object": "olpn",
+          "path": "OlpnId"
+        }
+      ],
+      "joins": [
+        {
+          "from": "olpn",
+          "to": "shipment",
+          "on": [
+            "ShipmentId"
+          ]
+        },
+        {
+          "from": "olpn",
+          "to": "order",
+          "on": [
+            "OrderId"
+          ]
+        }
+      ]
+    },
+    "services": {
+      "label": "Services",
+      "primaryObject": "order",
+      "objects": [
+        "order",
+        "olpn",
+        "item",
+        "ilpn",
+        "asn"
+      ],
+      "suggestedChargeColumns": [
+        {
+          "object": "order",
+          "path": "OrderId"
+        },
+        {
+          "object": "item",
+          "path": "ItemId"
+        },
+        {
+          "object": "olpn",
+          "path": "OlpnId"
+        }
+      ],
+      "joins": []
+    }
+  },
+  "attributes": [
+    {
+      "key": "appointment.appointmentcontents",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "AppointmentContents",
+      "label": "Appointment.AppointmentContents",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "appointment.appointmentid",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "AppointmentId",
+      "label": "Appointment.AppointmentId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "appointment.appointmentschedules[].appointmentscheduleid",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "AppointmentSchedules[].AppointmentScheduleId",
+      "label": "Appointment.AppointmentSchedules.AppointmentScheduleId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "appointment.appointmentschedules[].facilityid",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "AppointmentSchedules[].FacilityId",
+      "label": "Appointment.AppointmentSchedules.FacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "appointment.appointmentschedules[].orgid",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "AppointmentSchedules[].OrgId",
+      "label": "Appointment.AppointmentSchedules.OrgId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "appointment.appointmentschedules[].schedule",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "AppointmentSchedules[].Schedule",
+      "label": "Appointment.AppointmentSchedules.Schedule",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "appointment.appointmentschedules[].schedule.scheduleid",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "AppointmentSchedules[].Schedule.ScheduleId",
+      "label": "Appointment.AppointmentSchedules.Schedule.ScheduleId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "appointment.appointmentstatusid",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "AppointmentStatusId",
+      "label": "Appointment.AppointmentStatusId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "appointment.appointmenttypeid",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "AppointmentTypeId",
+      "label": "Appointment.AppointmentTypeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "appointment.arrivaldatetime",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "ArrivalDateTime",
+      "label": "Appointment.ArrivalDateTime",
+      "type": "datetime",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "appointment.asn",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "Asn",
+      "label": "Appointment.Asn",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "appointment.assigneddockid",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "AssignedDockId",
+      "label": "Appointment.AssignedDockId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "appointment.assigneddoorid",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "AssignedDoorId",
+      "label": "Appointment.AssignedDoorId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "appointment.carrierid",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "CarrierId",
+      "label": "Appointment.CarrierId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "appointment.contenttype",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "ContentType",
+      "label": "Appointment.ContentType",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "appointment.contenttypedescription",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "ContentTypeDescription",
+      "label": "Appointment.ContentTypeDescription",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "appointment.duration",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "Duration",
+      "label": "Appointment.Duration",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "appointment.extended",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "Extended",
+      "label": "Appointment.Extended",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "appointment.extended.priority",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "Extended.Priority",
+      "label": "Appointment.Extended.Priority",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "appointment.facilityid",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "FacilityId",
+      "label": "Appointment.FacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "appointment.orgid",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "OrgId",
+      "label": "Appointment.OrgId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "appointment.preferreddatetime",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "PreferredDateTime",
+      "label": "Appointment.PreferredDateTime",
+      "type": "datetime",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "appointment.resources[].groupname",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "Resources[].GroupName",
+      "label": "Appointment.Resources.GroupName",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "appointment.resources[].resourcename",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "Resources[].ResourceName",
+      "label": "Appointment.Resources.ResourceName",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "appointment.templateid",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "TemplateId",
+      "label": "Appointment.TemplateId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "appointment.templateid.templateid",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "TemplateId.TemplateId",
+      "label": "Appointment.TemplateId.TemplateId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "appointment.trailerid",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "TrailerId",
+      "label": "Appointment.TrailerId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "appointment.vendorid",
+      "object": "appointment",
+      "objectLabel": "Appointment",
+      "path": "VendorId",
+      "label": "Appointment.VendorId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "asn.asnid",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "AsnId",
+      "label": "ASN.AsnId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "asn.asnlevelid",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "AsnLevelId",
+      "label": "ASN.AsnLevelId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "asn.asnline",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "AsnLine",
+      "label": "ASN.AsnLine",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.asnline[].inventoryattribute1",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "AsnLine[].InventoryAttribute1",
+      "label": "ASN.AsnLine.InventoryAttribute1",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.asnline[].itemid",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "AsnLine[].ItemId",
+      "label": "ASN.AsnLine.ItemId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "asn.asnline[].shippedquantity",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "AsnLine[].ShippedQuantity",
+      "label": "ASN.AsnLine.ShippedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "asn.asnorigintypeid",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "AsnOriginTypeId",
+      "label": "ASN.AsnOriginTypeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "asn.asnstatus",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "AsnStatus",
+      "label": "ASN.AsnStatus",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.billofladingnumber",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "BillOfLadingNumber",
+      "label": "ASN.BillOfLadingNumber",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "asn.businessunitid",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "BusinessUnitId",
+      "label": "ASN.BusinessUnitId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "asn.canceled",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Canceled",
+      "label": "ASN.Canceled",
+      "type": "boolean",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.carrierid",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "CarrierId",
+      "label": "ASN.CarrierId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "asn.destinationfacilityid",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "DestinationFacilityId",
+      "label": "ASN.DestinationFacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "asn.extended",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Extended",
+      "label": "ASN.Extended",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.extended.asnpriority",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Extended.ASNPriority",
+      "label": "ASN.Extended.ASNPriority",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.extended.isappointmentpresent",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Extended.IsAppointmentPresent",
+      "label": "ASN.Extended.IsAppointmentPresent",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.facilityid",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "FacilityId",
+      "label": "ASN.FacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "asn.inventoryattribute1",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "InventoryAttribute1",
+      "label": "ASN.InventoryAttribute1",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.inventoryattribute2",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "InventoryAttribute2",
+      "label": "ASN.InventoryAttribute2",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.inventoryattribute3",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "InventoryAttribute3",
+      "label": "ASN.InventoryAttribute3",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.inventoryattribute4",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "InventoryAttribute4",
+      "label": "ASN.InventoryAttribute4",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.inventoryattribute5",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "InventoryAttribute5",
+      "label": "ASN.InventoryAttribute5",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.lpn[]",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Lpn[]",
+      "label": "ASN.Lpn",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.lpn[].lpndetail[]",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Lpn[].LpnDetail[]",
+      "label": "ASN.Lpn.LpnDetail",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.lpn[].lpndetail[].batchnumber",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Lpn[].LpnDetail[].BatchNumber",
+      "label": "ASN.Lpn.LpnDetail.BatchNumber",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.lpn[].lpndetail[].countryoforigin",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Lpn[].LpnDetail[].CountryOfOrigin",
+      "label": "ASN.Lpn.LpnDetail.CountryOfOrigin",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.lpn[].lpndetail[].inventoryattribute1",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Lpn[].LpnDetail[].InventoryAttribute1",
+      "label": "ASN.Lpn.LpnDetail.InventoryAttribute1",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.lpn[].lpndetail[].inventoryattribute2",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Lpn[].LpnDetail[].InventoryAttribute2",
+      "label": "ASN.Lpn.LpnDetail.InventoryAttribute2",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.lpn[].lpndetail[].inventoryattribute3",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Lpn[].LpnDetail[].InventoryAttribute3",
+      "label": "ASN.Lpn.LpnDetail.InventoryAttribute3",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.lpn[].lpndetail[].inventoryattribute4",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Lpn[].LpnDetail[].InventoryAttribute4",
+      "label": "ASN.Lpn.LpnDetail.InventoryAttribute4",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.lpn[].lpndetail[].inventoryattribute5",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Lpn[].LpnDetail[].InventoryAttribute5",
+      "label": "ASN.Lpn.LpnDetail.InventoryAttribute5",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.lpn[].lpndetail[].itemid",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Lpn[].LpnDetail[].ItemId",
+      "label": "ASN.Lpn.LpnDetail.ItemId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "asn.lpn[].lpndetail[].quantityuomid",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Lpn[].LpnDetail[].QuantityUomId",
+      "label": "ASN.Lpn.LpnDetail.QuantityUomId",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "asn.lpn[].lpndetail[].shippedquantity",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Lpn[].LpnDetail[].ShippedQuantity",
+      "label": "ASN.Lpn.LpnDetail.ShippedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "asn.lpn[].lpnid",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Lpn[].LpnId",
+      "label": "ASN.Lpn.LpnId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "asn.lpn[].lpnstatus",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Lpn[].LpnStatus",
+      "label": "ASN.Lpn.LpnStatus",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.lpn[].lpntypeid",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Lpn[].LpnTypeId",
+      "label": "ASN.Lpn.LpnTypeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "asn.lpn[].parentlpnid",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "Lpn[].ParentLpnId",
+      "label": "ASN.Lpn.ParentLpnId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "asn.orgid",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "OrgId",
+      "label": "ASN.OrgId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "asn.receivedlpns",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "ReceivedLpns",
+      "label": "ASN.ReceivedLpns",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.receivingcompleted",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "ReceivingCompleted",
+      "label": "ASN.ReceivingCompleted",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.shippedlpns",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "ShippedLpns",
+      "label": "ASN.ShippedLpns",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "asn.trailerid",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "TrailerId",
+      "label": "ASN.TrailerId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "asn.vendorid",
+      "object": "asn",
+      "objectLabel": "ASN",
+      "path": "VendorId",
+      "label": "ASN.VendorId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "ilpn.actualweight",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "ActualWeight",
+      "label": "iLPN.ActualWeight",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "ilpn.asnid",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "AsnId",
+      "label": "iLPN.AsnId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "ilpn.businessunitid",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "BusinessUnitId",
+      "label": "iLPN.BusinessUnitId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "ilpn.currentlocationid",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "CurrentLocationId",
+      "label": "iLPN.CurrentLocationId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "ilpn.currentlocationtypeid",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "CurrentLocationTypeId",
+      "label": "iLPN.CurrentLocationTypeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "ilpn.estimatedweight",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "EstimatedWeight",
+      "label": "iLPN.EstimatedWeight",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "ilpn.extended",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "Extended",
+      "label": "iLPN.Extended",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "ilpn.extended.cpd",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "Extended.CPD",
+      "label": "iLPN.Extended.CPD",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "ilpn.facilityid",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "FacilityId",
+      "label": "iLPN.FacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "ilpn.finaldestinationfacilityid",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "FinalDestinationFacilityId",
+      "label": "iLPN.FinalDestinationFacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "ilpn.hasproxyhold",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "HasProxyHold",
+      "label": "iLPN.HasProxyHold",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "ilpn.ilpnid",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "IlpnId",
+      "label": "iLPN.IlpnId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "ilpn.ilpntypeid",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "IlpnTypeId",
+      "label": "iLPN.IlpnTypeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "ilpn.isclosed",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "IsClosed",
+      "label": "iLPN.IsClosed",
+      "type": "boolean",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "ilpn.itemid",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "ItemId",
+      "label": "iLPN.ItemId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "ilpn.orgid",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "OrgId",
+      "label": "iLPN.OrgId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "ilpn.parentlpnid",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "ParentLpnId",
+      "label": "iLPN.ParentLpnId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "ilpn.physicalentitycodeid",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "PhysicalEntityCodeId",
+      "label": "iLPN.PhysicalEntityCodeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "ilpn.purchaseorderid",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "PurchaseOrderId",
+      "label": "iLPN.PurchaseOrderId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "ilpn.putawayallocated",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "PutawayAllocated",
+      "label": "iLPN.PutawayAllocated",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "ilpn.putawaycompleted",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "PutawayCompleted",
+      "label": "iLPN.PutawayCompleted",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "ilpn.shipmentid",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "ShipmentId",
+      "label": "iLPN.ShipmentId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "ilpn.singleitemlpn",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "SingleItemLpn",
+      "label": "iLPN.SingleItemLpn",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "ilpn.singlelinelpn",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "SingleLineLpn",
+      "label": "iLPN.SingleLineLpn",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "ilpn.status",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "Status",
+      "label": "iLPN.Status",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "ilpn.vendorid",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "VendorId",
+      "label": "iLPN.VendorId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "ilpn.volume",
+      "object": "ilpn",
+      "objectLabel": "iLPN",
+      "path": "Volume",
+      "label": "iLPN.Volume",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.catchweightitem",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "CatchWeightItem",
+      "label": "Item.CatchWeightItem",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.description",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "Description",
+      "label": "Item.Description",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.extended",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "Extended",
+      "label": "Item.Extended",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.extended.owner",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "Extended.Owner",
+      "label": "Item.Extended.Owner",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.extended.velocitycode",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "Extended.VelocityCode",
+      "label": "Item.Extended.VelocityCode",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.hazmat",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "Hazmat",
+      "label": "Item.Hazmat",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.height",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "Height",
+      "label": "Item.Height",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.itemgroup",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "ItemGroup",
+      "label": "Item.ItemGroup",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.itemid",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "ItemId",
+      "label": "Item.ItemId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "item.itempackage[].quantity",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "ItemPackage[].Quantity",
+      "label": "Item.ItemPackage.Quantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "item.itempackage[].standard",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "ItemPackage[].Standard",
+      "label": "Item.ItemPackage.Standard",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.itempackage[].standardquantityuomid",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "ItemPackage[].StandardQuantityUomId",
+      "label": "Item.ItemPackage.StandardQuantityUomId",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "item.itempackage[].uomid",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "ItemPackage[].UomId",
+      "label": "Item.ItemPackage.UomId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "item.length",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "Length",
+      "label": "Item.Length",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.primarybarcode",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "PrimaryBarCode",
+      "label": "Item.PrimaryBarCode",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.productclass",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "ProductClass",
+      "label": "Item.ProductClass",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.profileid",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "ProfileId",
+      "label": "Item.ProfileId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "item.shortdescription",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "ShortDescription",
+      "label": "Item.ShortDescription",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.trackbatchnumber",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "TrackBatchNumber",
+      "label": "Item.TrackBatchNumber",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.trackexpirydate",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "TrackExpiryDate",
+      "label": "Item.TrackExpiryDate",
+      "type": "datetime",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.trackitemattribute1",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "TrackItemAttribute1",
+      "label": "Item.TrackItemAttribute1",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.trackitemattribute2",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "TrackItemAttribute2",
+      "label": "Item.TrackItemAttribute2",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.trackitemattribute3",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "TrackItemAttribute3",
+      "label": "Item.TrackItemAttribute3",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.trackitemattribute4",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "TrackItemAttribute4",
+      "label": "Item.TrackItemAttribute4",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.trackitemattribute5",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "TrackItemAttribute5",
+      "label": "Item.TrackItemAttribute5",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.unitcost",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "UnitCost",
+      "label": "Item.UnitCost",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.unitprice",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "UnitPrice",
+      "label": "Item.UnitPrice",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.volume",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "Volume",
+      "label": "Item.Volume",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.weight",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "Weight",
+      "label": "Item.Weight",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "item.width",
+      "object": "item",
+      "objectLabel": "Item",
+      "path": "Width",
+      "label": "Item.Width",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "location.aisle",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "Aisle",
+      "label": "Location.Aisle",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "location.allowmixinginventoryattr1",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "AllowMixingInventoryAttr1",
+      "label": "Location.AllowMixingInventoryAttr1",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "location.allowmixinginventoryattr2",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "AllowMixingInventoryAttr2",
+      "label": "Location.AllowMixingInventoryAttr2",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "location.allowmixinginventoryattr3",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "AllowMixingInventoryAttr3",
+      "label": "Location.AllowMixingInventoryAttr3",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "location.allowmixinginventoryattr4",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "AllowMixingInventoryAttr4",
+      "label": "Location.AllowMixingInventoryAttr4",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "location.allowmixinginventoryattr5",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "AllowMixingInventoryAttr5",
+      "label": "Location.AllowMixingInventoryAttr5",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "location.area",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "Area",
+      "label": "Location.Area",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "location.displaylocation",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "DisplayLocation",
+      "label": "Location.DisplayLocation",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "location.dockdoortypeid",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "DockDoorTypeId",
+      "label": "Location.DockDoorTypeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "location.dockdoorzoneid",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "DockDoorZoneId",
+      "label": "Location.DockDoorZoneId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "location.dockid",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "DockId",
+      "label": "Location.DockId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "location.isactive",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "IsActive",
+      "label": "Location.IsActive",
+      "type": "boolean",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "location.locationbarcode",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "LocationBarcode",
+      "label": "Location.LocationBarcode",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "location.locationid",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "LocationId",
+      "label": "Location.LocationId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "location.locationtypeid",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "LocationTypeId",
+      "label": "Location.LocationTypeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "location.locationuom",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "LocationUom",
+      "label": "Location.LocationUom",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "location.maxvolume",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "MaxVolume",
+      "label": "Location.MaxVolume",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "location.maxweight",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "MaxWeight",
+      "label": "Location.MaxWeight",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "location.profileid",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "ProfileId",
+      "label": "Location.ProfileId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "location.trackcapacity",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "TrackCapacity",
+      "label": "Location.TrackCapacity",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "location.zone",
+      "object": "location",
+      "objectLabel": "Location",
+      "path": "Zone",
+      "label": "Location.Zone",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.billingmethod",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "BillingMethod",
+      "label": "oLPN.BillingMethod",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.billtoname",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "BillToName",
+      "label": "oLPN.BillToName",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.carrierid",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "CarrierId",
+      "label": "oLPN.CarrierId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.containersizeid",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "ContainerSizeId",
+      "label": "oLPN.ContainerSizeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.containertypeid",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "ContainerTypeId",
+      "label": "oLPN.ContainerTypeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.currentlocationid",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "CurrentLocationId",
+      "label": "oLPN.CurrentLocationId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.estimatedweight",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "EstimatedWeight",
+      "label": "oLPN.EstimatedWeight",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.extended",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "Extended",
+      "label": "oLPN.Extended",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.extended.poddate",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "Extended.PODDate",
+      "label": "oLPN.Extended.PODDate",
+      "type": "datetime",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.extended.ponum",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "Extended.PONum",
+      "label": "oLPN.Extended.PONum",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.facilityid",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "FacilityId",
+      "label": "oLPN.FacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.hotorder",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "HotOrder",
+      "label": "oLPN.HotOrder",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.issingleline",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "IsSingleLine",
+      "label": "oLPN.IsSingleLine",
+      "type": "boolean",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.lpntype",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "LpnType",
+      "label": "oLPN.LpnType",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.olpnaccessorial",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OlpnAccessorial",
+      "label": "oLPN.OlpnAccessorial",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.olpndetail[]",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OlpnDetail[]",
+      "label": "oLPN.OlpnDetail",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.olpndetail[].batchnumber",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OlpnDetail[].BatchNumber",
+      "label": "oLPN.OlpnDetail.BatchNumber",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.olpndetail[].initialquantity",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OlpnDetail[].InitialQuantity",
+      "label": "oLPN.OlpnDetail.InitialQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.olpndetail[].itemattribute1",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OlpnDetail[].ItemAttribute1",
+      "label": "oLPN.OlpnDetail.ItemAttribute1",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.olpndetail[].itemattribute2",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OlpnDetail[].ItemAttribute2",
+      "label": "oLPN.OlpnDetail.ItemAttribute2",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.olpndetail[].itemattribute3",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OlpnDetail[].ItemAttribute3",
+      "label": "oLPN.OlpnDetail.ItemAttribute3",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.olpndetail[].itemattribute4",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OlpnDetail[].ItemAttribute4",
+      "label": "oLPN.OlpnDetail.ItemAttribute4",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.olpndetail[].itemattribute5",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OlpnDetail[].ItemAttribute5",
+      "label": "oLPN.OlpnDetail.ItemAttribute5",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.olpndetail[].itemid",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OlpnDetail[].ItemId",
+      "label": "oLPN.OlpnDetail.ItemId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.olpndetail[].olpndetailid",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OlpnDetail[].OlpnDetailId",
+      "label": "oLPN.OlpnDetail.OlpnDetailId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.olpndetail[].orderid",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OlpnDetail[].OrderId",
+      "label": "oLPN.OlpnDetail.OrderId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.olpndetail[].orderlineid",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OlpnDetail[].OrderLineId",
+      "label": "oLPN.OlpnDetail.OrderLineId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.olpndetail[].packedquantity",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OlpnDetail[].PackedQuantity",
+      "label": "oLPN.OlpnDetail.PackedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.olpndetail[].pickedquantity",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OlpnDetail[].PickedQuantity",
+      "label": "oLPN.OlpnDetail.PickedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.olpndetail[].productclassid",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OlpnDetail[].ProductClassId",
+      "label": "oLPN.OlpnDetail.ProductClassId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.olpnid",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OlpnId",
+      "label": "oLPN.OlpnId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.orderid",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OrderId",
+      "label": "oLPN.OrderId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.orderpriority",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OrderPriority",
+      "label": "oLPN.OrderPriority",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.ordertype",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OrderType",
+      "label": "oLPN.OrderType",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.orgid",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OrgId",
+      "label": "oLPN.OrgId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.originfacilityid",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "OriginFacilityId",
+      "label": "oLPN.OriginFacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.picklocationid",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "PickLocationId",
+      "label": "oLPN.PickLocationId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.servicelevelid",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "ServiceLevelId",
+      "label": "oLPN.ServiceLevelId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.shipmentid",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "ShipmentId",
+      "label": "oLPN.ShipmentId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.shipviaid",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "ShipViaId",
+      "label": "oLPN.ShipViaId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "olpn.singlelineorder",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "SingleLineOrder",
+      "label": "oLPN.SingleLineOrder",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.status",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "Status",
+      "label": "oLPN.Status",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.volume",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "Volume",
+      "label": "oLPN.Volume",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "olpn.weight",
+      "object": "olpn",
+      "objectLabel": "oLPN",
+      "path": "Weight",
+      "label": "oLPN.Weight",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.billingmethodid",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "BillingMethodId",
+      "label": "Order.BillingMethodId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "order.billtoname",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "BillToName",
+      "label": "Order.BillToName",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.businessunitid",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "BusinessUnitId",
+      "label": "Order.BusinessUnitId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "order.cancelled",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "Cancelled",
+      "label": "Order.Cancelled",
+      "type": "boolean",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.destinationfacilityid",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "DestinationFacilityId",
+      "label": "Order.DestinationFacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "order.extended",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "Extended",
+      "label": "Order.Extended",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.extended.transfertype",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "Extended.TransferType",
+      "label": "Order.Extended.TransferType",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.facilityid",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "FacilityId",
+      "label": "Order.FacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "order.maximumstatus",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "MaximumStatus",
+      "label": "Order.MaximumStatus",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.minimumstatus",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "MinimumStatus",
+      "label": "Order.MinimumStatus",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.orderattributes",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderAttributes",
+      "label": "Order.OrderAttributes",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.orderid",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderId",
+      "label": "Order.OrderId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "order.orderline[]",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderLine[]",
+      "label": "Order.OrderLine",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.orderline[].allocatedquantity",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderLine[].AllocatedQuantity",
+      "label": "Order.OrderLine.AllocatedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "order.orderline[].assignedshipmentid",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderLine[].AssignedShipmentId",
+      "label": "Order.OrderLine.AssignedShipmentId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "order.orderline[].hotorder",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderLine[].HotOrder",
+      "label": "Order.OrderLine.HotOrder",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.orderline[].itemattribute1",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderLine[].ItemAttribute1",
+      "label": "Order.OrderLine.ItemAttribute1",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.orderline[].itemattribute2",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderLine[].ItemAttribute2",
+      "label": "Order.OrderLine.ItemAttribute2",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.orderline[].itemattribute3",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderLine[].ItemAttribute3",
+      "label": "Order.OrderLine.ItemAttribute3",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.orderline[].itemattribute4",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderLine[].ItemAttribute4",
+      "label": "Order.OrderLine.ItemAttribute4",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.orderline[].itemattribute5",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderLine[].ItemAttribute5",
+      "label": "Order.OrderLine.ItemAttribute5",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.orderline[].itemid",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderLine[].ItemId",
+      "label": "Order.OrderLine.ItemId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "order.orderline[].orderedquantity",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderLine[].OrderedQuantity",
+      "label": "Order.OrderLine.OrderedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "order.orderline[].orderid",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderLine[].OrderId",
+      "label": "Order.OrderLine.OrderId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "order.orderline[].orderlineid",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderLine[].OrderLineId",
+      "label": "Order.OrderLine.OrderLineId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "order.orderline[].packedquantity",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderLine[].PackedQuantity",
+      "label": "Order.OrderLine.PackedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "order.orderline[].pipelinestatus",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderLine[].PipelineStatus",
+      "label": "Order.OrderLine.PipelineStatus",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.orderline[].shippedquantity",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderLine[].ShippedQuantity",
+      "label": "Order.OrderLine.ShippedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "order.orderline[].status",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderLine[].Status",
+      "label": "Order.OrderLine.Status",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.orderline[].unitprice",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderLine[].UnitPrice",
+      "label": "Order.OrderLine.UnitPrice",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.ordertype",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrderType",
+      "label": "Order.OrderType",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.orgid",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OrgId",
+      "label": "Order.OrgId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "order.originfacilityid",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "OriginFacilityId",
+      "label": "Order.OriginFacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "order.pipelineid",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "PipelineId",
+      "label": "Order.PipelineId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "order.priority",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "Priority",
+      "label": "Order.Priority",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.residentialdestination",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "ResidentialDestination",
+      "label": "Order.ResidentialDestination",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.singlelineorder",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "SingleLineOrder",
+      "label": "Order.SingleLineOrder",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "order.singleunitorder",
+      "object": "order",
+      "objectLabel": "Order",
+      "path": "SingleUnitOrder",
+      "label": "Order.SingleUnitOrder",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "purchase_order.alternatepurchaseorderid",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "AlternatePurchaseOrderId",
+      "label": "PO.AlternatePurchaseOrderId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "purchase_order.businessunitid",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "BusinessUnitId",
+      "label": "PO.BusinessUnitId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "purchase_order.canceled",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "Canceled",
+      "label": "PO.Canceled",
+      "type": "boolean",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "purchase_order.closed",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "Closed",
+      "label": "PO.Closed",
+      "type": "boolean",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "purchase_order.deliveryenddate",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "DeliveryEndDate",
+      "label": "PO.DeliveryEndDate",
+      "type": "datetime",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "purchase_order.deliverystartdate",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "DeliveryStartDate",
+      "label": "PO.DeliveryStartDate",
+      "type": "datetime",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "purchase_order.destinationfacilityid",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "DestinationFacilityId",
+      "label": "PO.DestinationFacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "purchase_order.extended",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "Extended",
+      "label": "PO.Extended",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "purchase_order.extended.popriority",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "Extended.POPriority",
+      "label": "PO.Extended.POPriority",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "purchase_order.facilityid",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "FacilityId",
+      "label": "PO.FacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "purchase_order.orgid",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "OrgId",
+      "label": "PO.OrgId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "purchase_order.purchaseorderid",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "PurchaseOrderId",
+      "label": "PO.PurchaseOrderId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "purchase_order.purchaseorderline[]",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "PurchaseOrderLine[]",
+      "label": "PO.PurchaseOrderLine",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "purchase_order.purchaseorderline[].batchnumber",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "PurchaseOrderLine[].BatchNumber",
+      "label": "PO.PurchaseOrderLine.BatchNumber",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "purchase_order.purchaseorderline[].canceled",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "PurchaseOrderLine[].Canceled",
+      "label": "PO.PurchaseOrderLine.Canceled",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "purchase_order.purchaseorderline[].closed",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "PurchaseOrderLine[].Closed",
+      "label": "PO.PurchaseOrderLine.Closed",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "purchase_order.purchaseorderline[].countryoforigin",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "PurchaseOrderLine[].CountryOfOrigin",
+      "label": "PO.PurchaseOrderLine.CountryOfOrigin",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "purchase_order.purchaseorderline[].inventoryattribute1",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "PurchaseOrderLine[].InventoryAttribute1",
+      "label": "PO.PurchaseOrderLine.InventoryAttribute1",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "purchase_order.purchaseorderline[].inventoryattribute2",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "PurchaseOrderLine[].InventoryAttribute2",
+      "label": "PO.PurchaseOrderLine.InventoryAttribute2",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "purchase_order.purchaseorderline[].inventoryattribute3",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "PurchaseOrderLine[].InventoryAttribute3",
+      "label": "PO.PurchaseOrderLine.InventoryAttribute3",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "purchase_order.purchaseorderline[].inventoryattribute4",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "PurchaseOrderLine[].InventoryAttribute4",
+      "label": "PO.PurchaseOrderLine.InventoryAttribute4",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "purchase_order.purchaseorderline[].inventoryattribute5",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "PurchaseOrderLine[].InventoryAttribute5",
+      "label": "PO.PurchaseOrderLine.InventoryAttribute5",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "purchase_order.purchaseorderline[].itemid",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "PurchaseOrderLine[].ItemId",
+      "label": "PO.PurchaseOrderLine.ItemId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "purchase_order.purchaseorderline[].orderquantity",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "PurchaseOrderLine[].OrderQuantity",
+      "label": "PO.PurchaseOrderLine.OrderQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "purchase_order.purchaseorderline[].productstatusid",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "PurchaseOrderLine[].ProductStatusId",
+      "label": "PO.PurchaseOrderLine.ProductStatusId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "purchase_order.purchaseorderline[].purchaseorderlineid",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "PurchaseOrderLine[].PurchaseOrderLineId",
+      "label": "PO.PurchaseOrderLine.PurchaseOrderLineId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "purchase_order.purchaseorderline[].quantityuomid",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "PurchaseOrderLine[].QuantityUomId",
+      "label": "PO.PurchaseOrderLine.QuantityUomId",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "purchase_order.purchaseorderline[].shippedquantity",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "PurchaseOrderLine[].ShippedQuantity",
+      "label": "PO.PurchaseOrderLine.ShippedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "purchase_order.purchaseorderline[].unshippedquantity",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "PurchaseOrderLine[].UnShippedQuantity",
+      "label": "PO.PurchaseOrderLine.UnShippedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "purchase_order.purchaseorderstatus",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "PurchaseOrderStatus",
+      "label": "PO.PurchaseOrderStatus",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "purchase_order.vendorid",
+      "object": "purchase_order",
+      "objectLabel": "PO",
+      "path": "VendorId",
+      "label": "PO.VendorId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "shipment.assignedcarrierid",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "AssignedCarrierId",
+      "label": "Shipment.AssignedCarrierId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "shipment.billingmethodid",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "BillingMethodId",
+      "label": "Shipment.BillingMethodId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "shipment.broadcaststatusid",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "BroadcastStatusId",
+      "label": "Shipment.BroadcastStatusId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "shipment.currencycode",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "CurrencyCode",
+      "label": "Shipment.CurrencyCode",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "shipment.designatedcarrierid",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "DesignatedCarrierId",
+      "label": "Shipment.DesignatedCarrierId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "shipment.extended",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "Extended",
+      "label": "Shipment.Extended",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "shipment.hazardousmaterial",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "HazardousMaterial",
+      "label": "Shipment.HazardousMaterial",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "shipment.invoicingstatusid",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "InvoicingStatusId",
+      "label": "Shipment.InvoicingStatusId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "shipment.orgid",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "OrgId",
+      "label": "Shipment.OrgId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "shipment.pipelineid",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "PipelineId",
+      "label": "Shipment.PipelineId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "shipment.pipelinestatus",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "PipelineStatus",
+      "label": "Shipment.PipelineStatus",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "shipment.planningstatusid",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "PlanningStatusId",
+      "label": "Shipment.PlanningStatusId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "shipment.planningtypeid",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "PlanningTypeId",
+      "label": "Shipment.PlanningTypeId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "shipment.shipmentcost",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "ShipmentCost",
+      "label": "Shipment.ShipmentCost",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "shipment.shipmentid",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "ShipmentId",
+      "label": "Shipment.ShipmentId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "shipment.shipmentpickupdelivery",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "ShipmentPickupDelivery",
+      "label": "Shipment.ShipmentPickupDelivery",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "shipment.shipmentversion",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "ShipmentVersion",
+      "label": "Shipment.ShipmentVersion",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "shipment.stop[]",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "Stop[]",
+      "label": "Shipment.Stop",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "shipment.stop[].billofladingnumber",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "Stop[].BillOfLadingNumber",
+      "label": "Shipment.Stop.BillOfLadingNumber",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "shipment.stop[].dockdoorid",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "Stop[].DockDoorId",
+      "label": "Shipment.Stop.DockDoorId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "shipment.stop[].facilityid",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "Stop[].FacilityId",
+      "label": "Shipment.Stop.FacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "shipment.stop[].plannedarrivaldatetime",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "Stop[].PlannedArrivalDateTime",
+      "label": "Shipment.Stop.PlannedArrivalDateTime",
+      "type": "datetime",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "shipment.stop[].stopactionid",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "Stop[].StopActionId",
+      "label": "Shipment.Stop.StopActionId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "shipment.stop[].stopactionid.stopactionid",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "Stop[].StopActionId.StopActionId",
+      "label": "Shipment.Stop.StopActionId.StopActionId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "shipment.stop[].stopid",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "Stop[].StopId",
+      "label": "Shipment.Stop.StopId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "shipment.stop[].stopsequence",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "Stop[].StopSequence",
+      "label": "Shipment.Stop.StopSequence",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "shipment.stop[].stopsizes",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "Stop[].StopSizes",
+      "label": "Shipment.Stop.StopSizes",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "shipment.stop[].stoptransportationorder",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "Stop[].StopTransportationOrder",
+      "label": "Shipment.Stop.StopTransportationOrder",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "shipment.stop[].warehousestatusid",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "Stop[].WarehouseStatusId",
+      "label": "Shipment.Stop.WarehouseStatusId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "shipment.tenderstatusid",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "TenderStatusId",
+      "label": "Shipment.TenderStatusId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "key": "shipment.totalaccessorialcost",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "TotalAccessorialCost",
+      "label": "Shipment.TotalAccessorialCost",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "shipment.totalfreightcost",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "TotalFreightCost",
+      "label": "Shipment.TotalFreightCost",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "shipment.totalshipmentcost",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "TotalShipmentCost",
+      "label": "Shipment.TotalShipmentCost",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "shipment.totalvolume",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "TotalVolume",
+      "label": "Shipment.TotalVolume",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "shipment.totalweight",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "TotalWeight",
+      "label": "Shipment.TotalWeight",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "shipment.trailernumber",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "TrailerNumber",
+      "label": "Shipment.TrailerNumber",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "key": "shipment.transitstatusid",
+      "object": "shipment",
+      "objectLabel": "Shipment",
+      "path": "TransitStatusId",
+      "label": "Shipment.TransitStatusId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    }
+  ]
+}

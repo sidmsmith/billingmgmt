@@ -1,0 +1,194 @@
+{
+  "object": "purchase_order",
+  "label": "PO",
+  "searchPath": "/receiving/api/receiving/purchaseOrder/search",
+  "idField": "PurchaseOrderId",
+  "fields": [
+    {
+      "path": "AlternatePurchaseOrderId",
+      "label": "PO.AlternatePurchaseOrderId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "BusinessUnitId",
+      "label": "PO.BusinessUnitId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Canceled",
+      "label": "PO.Canceled",
+      "type": "boolean",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Closed",
+      "label": "PO.Closed",
+      "type": "boolean",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "DeliveryEndDate",
+      "label": "PO.DeliveryEndDate",
+      "type": "datetime",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "DeliveryStartDate",
+      "label": "PO.DeliveryStartDate",
+      "type": "datetime",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "DestinationFacilityId",
+      "label": "PO.DestinationFacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "Extended",
+      "label": "PO.Extended",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "Extended.POPriority",
+      "label": "PO.Extended.POPriority",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "FacilityId",
+      "label": "PO.FacilityId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "OrgId",
+      "label": "PO.OrgId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "PurchaseOrderId",
+      "label": "PO.PurchaseOrderId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "PurchaseOrderLine[]",
+      "label": "PO.PurchaseOrderLine",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "PurchaseOrderLine[].BatchNumber",
+      "label": "PO.PurchaseOrderLine.BatchNumber",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "PurchaseOrderLine[].Canceled",
+      "label": "PO.PurchaseOrderLine.Canceled",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "PurchaseOrderLine[].Closed",
+      "label": "PO.PurchaseOrderLine.Closed",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "PurchaseOrderLine[].CountryOfOrigin",
+      "label": "PO.PurchaseOrderLine.CountryOfOrigin",
+      "type": "number",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "PurchaseOrderLine[].InventoryAttribute1",
+      "label": "PO.PurchaseOrderLine.InventoryAttribute1",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "PurchaseOrderLine[].InventoryAttribute2",
+      "label": "PO.PurchaseOrderLine.InventoryAttribute2",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "PurchaseOrderLine[].InventoryAttribute3",
+      "label": "PO.PurchaseOrderLine.InventoryAttribute3",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "PurchaseOrderLine[].InventoryAttribute4",
+      "label": "PO.PurchaseOrderLine.InventoryAttribute4",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "PurchaseOrderLine[].InventoryAttribute5",
+      "label": "PO.PurchaseOrderLine.InventoryAttribute5",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "PurchaseOrderLine[].ItemId",
+      "label": "PO.PurchaseOrderLine.ItemId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "PurchaseOrderLine[].OrderQuantity",
+      "label": "PO.PurchaseOrderLine.OrderQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "PurchaseOrderLine[].ProductStatusId",
+      "label": "PO.PurchaseOrderLine.ProductStatusId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "PurchaseOrderLine[].PurchaseOrderLineId",
+      "label": "PO.PurchaseOrderLine.PurchaseOrderLineId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "PurchaseOrderLine[].QuantityUomId",
+      "label": "PO.PurchaseOrderLine.QuantityUomId",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "PurchaseOrderLine[].ShippedQuantity",
+      "label": "PO.PurchaseOrderLine.ShippedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "PurchaseOrderLine[].UnShippedQuantity",
+      "label": "PO.PurchaseOrderLine.UnShippedQuantity",
+      "type": "number",
+      "chargeColumnCandidate": true
+    },
+    {
+      "path": "PurchaseOrderStatus",
+      "label": "PO.PurchaseOrderStatus",
+      "type": "string",
+      "chargeColumnCandidate": false
+    },
+    {
+      "path": "VendorId",
+      "label": "PO.VendorId",
+      "type": "string",
+      "chargeColumnCandidate": true
+    }
+  ]
+}
