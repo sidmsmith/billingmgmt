@@ -37,6 +37,8 @@ billingmgmt/
 │   └── crawl_rule_attributes.py   # MAWM Rules Framework attribute crawler
 ├── data/
 │   ├── defaults/                  # Shipped demo config
+│   ├── samples/                   # Stripped activity samples for dry-run
+│   ├── field_catalog/             # Object field catalogs for rule builder
 │   └── rule_inventory/            # Crawled / seeded attribute inventory
 ├── config/orgs/      # Per-ORG overrides (Save & Deploy)
 ├── billing_config_service.py
@@ -68,6 +70,26 @@ python ../mawm_api_library/_scripts/generate_field_catalogs.py
 2. Enrich each txn via search APIs + domain joins  
 3. Evaluate client rules (charge column + conditions + rate)  
 4. Write billing charge records  
+
+### Receiving sample dry-run (v0)
+
+Local-only sample path (no live activity pull):
+
+- Sample txns: `data/samples/activity_receiving.json` (stripped Receive rows)
+- Test client: **SS-DEMO-DM1 → DM1 → DEMO-RECV**
+  - `rule-recv-ilpn` — $4.50 per `activity.ContainerId` when `TransactionTypeId=Receive`
+  - `rule-recv-unit-dock` — $0.15 × `activity.Quantity` when `TransactionId` is dock door / LPN level
+- Evaluate:
+
+```bash
+python scripts/dry_run_receiving.py
+```
+
+Refresh samples from a saved activity-search JSON:
+
+```bash
+python scripts/extract_receiving_samples.py --input path/to/activity_search.json
+```
 
 Auth for live crawls still uses refreshable **`.token`** (same as flowthrough).
 

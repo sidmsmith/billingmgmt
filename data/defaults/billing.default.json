@@ -354,6 +354,123 @@
                   ]
                 }
               ]
+            },
+            {
+              "id": "DEMO-RECV",
+              "name": "DEMO Receiving Lab",
+              "clientActivities": [
+                {
+                  "id": "act-recv-ilpn",
+                  "activityType": "Receiving",
+                  "activityCode": "RECV_ILPN",
+                  "description": "Inbound receive by iLPN/container (sample dry-run)",
+                  "billable": true,
+                  "triggerMode": "inline",
+                  "billToCode": "DEMO-RECV-MAIN"
+                },
+                {
+                  "id": "act-recv-unit",
+                  "activityType": "Receiving",
+                  "activityCode": "RECV_UNIT",
+                  "description": "Inbound receive by unit quantity (sample dry-run)",
+                  "billable": true,
+                  "triggerMode": "inline",
+                  "billToCode": "DEMO-RECV-MAIN"
+                }
+              ],
+              "rateCards": [
+                {
+                  "id": "rc-recv-ilpn",
+                  "name": "Receiving per iLPN",
+                  "uom": "iLPN",
+                  "rate": 4.5,
+                  "glCode": "4100-RECV",
+                  "effectiveFrom": "2025-01-01",
+                  "effectiveTo": null
+                },
+                {
+                  "id": "rc-recv-unit",
+                  "name": "Receiving per unit",
+                  "uom": "Unit",
+                  "rate": 0.15,
+                  "glCode": "4100-RECV",
+                  "effectiveFrom": "2025-01-01",
+                  "effectiveTo": null
+                }
+              ],
+              "rulesTransaction": [
+                {
+                  "id": "rule-recv-ilpn",
+                  "name": "Receiving per ContainerId",
+                  "activityId": "act-recv-ilpn",
+                  "rateCardId": "rc-recv-ilpn",
+                  "ruleType": "transaction",
+                  "chargeSumType": "line",
+                  "chargeType": "per",
+                  "chargeColumn": { "object": "activity", "path": "ContainerId" },
+                  "priority": 10,
+                  "minCharge": 0,
+                  "maxCharge": null,
+                  "attributeSource": { "domain": "receiving" },
+                  "conditions": [
+                    {
+                      "object": "activity",
+                      "path": "TransactionTypeId",
+                      "operator": "eq",
+                      "value": "Receive"
+                    }
+                  ],
+                  "active": true
+                },
+                {
+                  "id": "rule-recv-unit-dock",
+                  "name": "Receiving per Quantity (dock / LPN level)",
+                  "activityId": "act-recv-unit",
+                  "rateCardId": "rc-recv-unit",
+                  "ruleType": "transaction",
+                  "chargeSumType": "line",
+                  "chargeType": "per",
+                  "chargeColumn": { "object": "activity", "path": "Quantity" },
+                  "priority": 20,
+                  "minCharge": 0,
+                  "maxCharge": null,
+                  "attributeSource": { "domain": "receiving" },
+                  "conditions": [
+                    {
+                      "object": "activity",
+                      "path": "TransactionId",
+                      "operator": "in",
+                      "value": ["Receive-Dock Door", "Receive LPN Level"]
+                    }
+                  ],
+                  "active": true
+                }
+              ],
+              "rulesStorage": [],
+              "billToCodes": [
+                {
+                  "id": "DEMO-RECV-MAIN",
+                  "name": "DEMO Receiving Lab Billing",
+                  "invoiceGroup": "WAREHOUSE",
+                  "presentationOrder": 1,
+                  "taxPercent": 0,
+                  "active": true
+                }
+              ],
+              "billingLogDefinitions": [
+                {
+                  "id": "bld-recv-ilpn",
+                  "billToCode": "DEMO-RECV-MAIN",
+                  "activityId": "act-recv-ilpn",
+                  "referenceFields": ["asn", "container", "item", "quantity"]
+                },
+                {
+                  "id": "bld-recv-unit",
+                  "billToCode": "DEMO-RECV-MAIN",
+                  "activityId": "act-recv-unit",
+                  "referenceFields": ["asn", "container", "item", "quantity"]
+                }
+              ]
             }
           ]
         },
